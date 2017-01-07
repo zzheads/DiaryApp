@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
+        tableView.register(Entry.EntryCell.self, forCellReuseIdentifier: Entry.EntryCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -51,21 +51,25 @@ class ViewController: UIViewController {
         ]
 
         print(entries)
+        
+        
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)
+                
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    override func viewWillLayoutSubviews() {
+    }
 
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let entry = self.dataSource.objectAt(indexPath: indexPath)
-        print(entry)
+        print(self.dataSource.results)
     }
 }
 

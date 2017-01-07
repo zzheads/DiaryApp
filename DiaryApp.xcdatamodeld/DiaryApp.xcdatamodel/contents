@@ -18,7 +18,7 @@
         <relationship name="entries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="mood" inverseEntity="Entry" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="entries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="photo" inverseEntity="Entry" syncable="YES"/>
     </entity>
     <elements>

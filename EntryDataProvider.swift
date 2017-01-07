@@ -48,6 +48,10 @@ class EntryDataProvider {
         }
     }
     
+    func delete(entry: Entry) {
+        self.managedObjectContext.delete(entry)
+    }
+    
     private func processResult(result: Result<[Entry]>) {
         DispatchQueue.main.async {
             switch result {

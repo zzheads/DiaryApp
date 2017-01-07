@@ -2,16 +2,14 @@
 //  DiaryAppTests.swift
 //  DiaryAppTests
 //
-//  Created by Alexey Papin on 06.01.17.
+//  Created by Alexey Papin on 07.01.17.
 //  Copyright © 2017 zzheads. All rights reserved.
 //
 
 import XCTest
-//@testable import DiaryApp
 
 class DiaryAppTests: XCTestCase {
-    var mood = Mood.mood(withTitle: "Happy")
-
+    
     override func setUp() {
         super.setUp()
     }
@@ -21,6 +19,7 @@ class DiaryAppTests: XCTestCase {
     }
     
     func testExample() {
-        XCTAssertNotNil(self.mood)
-    }
+        let mood = Mood.mood(withTitle: "Bad")
+        XCTAssertNotNil(mood)
+    }    
 }

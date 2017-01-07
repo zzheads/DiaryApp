@@ -38,9 +38,9 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Entry.EntryCell.reuseIdentifier, for: indexPath)
         let entry = objectAt(indexPath: indexPath)
-        //cell.imageView?.image = entry.photo?.imageView.image
+        cell.imageView?.image = entry.photoWithMood.image
         cell.textLabel?.text = entry.title
         return cell
     }

@@ -21,19 +21,20 @@ class Photo: NSManagedObject {
             return nil
         }
         let photo = NSEntityDescription.insertNewObject(forEntityName: Photo.entityName, into: CoreDataController.sharedInstance.managedObjectContext) as! Photo
-        photo.image = data
+        photo.data = data
         return photo
     }
 }
 
 extension Photo {
-    @NSManaged var image: Data
+    @NSManaged var data: Data
 }
 
 extension Photo {
-    var imageView: UIImageView {
-        let imageView = UIImageView(image: UIImage(data: self.image))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    var image: UIImage {
+        if let image = UIImage(data: self.data) {
+            return image
+        }
+        return #imageLiteral(resourceName: "icn_picture")
     }
 }
