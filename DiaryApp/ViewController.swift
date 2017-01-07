@@ -37,21 +37,32 @@ class ViewController: UIViewController {
             self.tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor)
             ])
-        
-        let mood = Mood.mood(withTitle: "Bad")
-        let location = Location.location(latitude: 10.0, longitude: 20.0)
-        let photo = Photo.photo(withImage: UIImage(named: "icn_bad"))
-        
-        let entries = [
-            Entry.entry(withTitle: "Test entry1", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-            Entry.entry(withTitle: "Test entry2", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-            Entry.entry(withTitle: "Test entry3", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-            Entry.entry(withTitle: "Test entry4", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-            Entry.entry(withTitle: "Test entry5", text: "Some not long text of test entry", photo: photo, location: location, mood: mood)
-        ]
 
-        print(entries)
         
+        let moc = CoreDataController.sharedInstance.managedObjectContext
+        
+//        let mood1 = Mood.mood(withTitle: "Bad")
+//        let mood2 = Mood(title: "Happy")
+//        let mood3 = Mood(title: "Average")
+//        let mood4 = Mood(title: "Strange")
+//        let location = Location.location(latitude: 10.0, longitude: 20.0)
+//        let photo = Photo.photo(withImage: UIImage(named: "icn_bad"))
+//        
+//        try! moc.save()
+//        
+//        let entries = [
+//            Entry.entry(withTitle: "Test entry1", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
+//            Entry.entry(withTitle: "Test entry2", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
+//        ]
+        
+        do {
+            let moods = try moc.fetch(Mood.allMoodsRequest) as! [Mood]
+            for mood in moods {
+                print("MOOD: id=\(mood.objectID) \(mood.title)")
+            }
+        } catch (let error) {
+            print(error)
+        }
         
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)

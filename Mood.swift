@@ -21,6 +21,19 @@ class Mood: NSManagedObject {
         case Unknown
     }
     
+    convenience init?(title: String) {
+        let context = CoreDataController.sharedInstance.managedObjectContext
+        guard let entity = NSEntityDescription.entity(forEntityName: Mood.entityName, in: context) else {
+            return nil
+        }
+        self.init(entity: entity, insertInto: context)
+        if let moodState = MoodState(rawValue: title) {
+            self.title = moodState.rawValue
+        } else {
+            self.title = MoodState.Unknown.rawValue
+        }
+    }
+    
     class func mood(withTitle title: String) -> Mood {
         let mood: Mood = NSEntityDescription.insertNewObject(forEntityName: Mood.entityName, into: CoreDataController.sharedInstance.managedObjectContext) as! Mood
         if let moodState = MoodState(rawValue: title) {
@@ -30,6 +43,12 @@ class Mood: NSManagedObject {
         }
         return mood
     }
+    
+    static let allMoodsRequest: NSFetchRequest = { () -> NSFetchRequest<NSFetchRequestResult> in
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Mood.entityName)
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        return request
+    }()
 }
 
 extension Mood {

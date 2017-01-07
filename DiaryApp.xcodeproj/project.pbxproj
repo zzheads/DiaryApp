@@ -16,21 +16,6 @@
 		A651F4BC1E20DD960002FE4A /* List.png in Resources */ = {isa = PBXBuildFile; fileRef = A651F4B71E20DD960002FE4A /* List.png */; };
 		A651F4BE1E20DD960002FE4A /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = A651F4B81E20DD960002FE4A /* Preview.png */; };
 		A651F4C01E20DD960002FE4A /* Thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = A651F4B91E20DD960002FE4A /* Thumbnail.png */; };
-		A651F4FB1E2153FF0002FE4A /* DiaryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4FA1E2153FF0002FE4A /* DiaryAppTests.swift */; };
-		A651F5021E2154070002FE4A /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4A41E1FD0C30002FE4A /* Mood.swift */; };
-		A651F5031E2154880002FE4A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4AF1E20D0BD0002FE4A /* Location.swift */; };
-		A651F5041E21548C0002FE4A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4B21E20D5DD0002FE4A /* Photo.swift */; };
-		A651F5051E2154930002FE4A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4C21E20DFBA0002FE4A /* Entry.swift */; };
-		A651F5061E2154930002FE4A /* EntryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4C51E20E6140002FE4A /* EntryDataSource.swift */; };
-		A651F5071E2154930002FE4A /* EntryDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4CE1E20F0DA0002FE4A /* EntryDataProvider.swift */; };
-		A651F5081E2154930002FE4A /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4D71E20F1A80002FE4A /* QueryType.swift */; };
-		A651F5091E2154930002FE4A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4DA1E20F31D0002FE4A /* Result.swift */; };
-		A651F50A1E21549A0002FE4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4821E1FCE8E0002FE4A /* ViewController.swift */; };
-		A651F50B1E21549A0002FE4A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4AC1E1FD46F0002FE4A /* CoreDataController.swift */; };
-		A651F50C1E21549A0002FE4A /* EntryFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4C81E20E6590002FE4A /* EntryFetchedResultsController.swift */; };
-		A651F50D1E2154A90002FE4A /* UIImage+drawMoodBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4DE1E2116520002FE4A /* UIImage+drawMoodBadge.swift */; };
-		A651F50E1E2154A90002FE4A /* UIImageView+Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4E11E211F000002FE4A /* UIImageView+Circle.swift */; };
-		A651F50F1E2154AC0002FE4A /* EntryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4D21E20F10C0002FE4A /* EntryError.swift */; };
 		A651F51F1E21565C0002FE4A /* UIImage+drawMoodBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4DE1E2116520002FE4A /* UIImage+drawMoodBadge.swift */; };
 		A651F5201E21565C0002FE4A /* UIImageView+Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4E11E211F000002FE4A /* UIImageView+Circle.swift */; };
 		A651F5211E21565C0002FE4A /* EntryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4D21E20F10C0002FE4A /* EntryError.swift */; };
@@ -45,17 +30,16 @@
 		A651F52A1E21565C0002FE4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4821E1FCE8E0002FE4A /* ViewController.swift */; };
 		A651F52B1E21565C0002FE4A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4AC1E1FD46F0002FE4A /* CoreDataController.swift */; };
 		A651F52C1E21565C0002FE4A /* EntryFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4C81E20E6590002FE4A /* EntryFetchedResultsController.swift */; };
-		A651F52F1E2156A10002FE4A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A651F52E1E2156A10002FE4A /* CoreData.framework */; };
-		A651F5311E2156AA0002FE4A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A651F5301E2156AA0002FE4A /* XCTest.framework */; };
+		A651F5531E215AEF0002FE4A /* DiaryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4FA1E2153FF0002FE4A /* DiaryAppTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A651F4FD1E2153FF0002FE4A /* PBXContainerItemProxy */ = {
+		A651F5511E215AC80002FE4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A651F4751E1FCE8E0002FE4A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A651F47C1E1FCE8E0002FE4A;
-			remoteInfo = DiaryApp;
+			remoteGlobalIDString = A651F4F71E2153FF0002FE4A;
+			remoteInfo = DiaryAppTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -97,8 +81,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A651F5311E2156AA0002FE4A /* XCTest.framework in Frameworks */,
-				A651F52F1E2156A10002FE4A /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +217,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A651F5521E215AC80002FE4A /* PBXTargetDependency */,
 			);
 			name = DiaryApp;
 			productName = DiaryApp;
@@ -252,7 +235,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A651F4FE1E2153FF0002FE4A /* PBXTargetDependency */,
 			);
 			name = DiaryAppTests;
 			productName = DiaryAppTests;
@@ -356,31 +338,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A651F50E1E2154A90002FE4A /* UIImageView+Circle.swift in Sources */,
-				A651F50F1E2154AC0002FE4A /* EntryError.swift in Sources */,
-				A651F50A1E21549A0002FE4A /* ViewController.swift in Sources */,
-				A651F5091E2154930002FE4A /* Result.swift in Sources */,
-				A651F5051E2154930002FE4A /* Entry.swift in Sources */,
-				A651F5071E2154930002FE4A /* EntryDataProvider.swift in Sources */,
-				A651F5081E2154930002FE4A /* QueryType.swift in Sources */,
-				A651F50C1E21549A0002FE4A /* EntryFetchedResultsController.swift in Sources */,
-				A651F5061E2154930002FE4A /* EntryDataSource.swift in Sources */,
-				A651F50D1E2154A90002FE4A /* UIImage+drawMoodBadge.swift in Sources */,
-				A651F50B1E21549A0002FE4A /* CoreDataController.swift in Sources */,
-				A651F5041E21548C0002FE4A /* Photo.swift in Sources */,
-				A651F5021E2154070002FE4A /* Mood.swift in Sources */,
-				A651F5031E2154880002FE4A /* Location.swift in Sources */,
-				A651F4FB1E2153FF0002FE4A /* DiaryAppTests.swift in Sources */,
+				A651F5531E215AEF0002FE4A /* DiaryAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A651F4FE1E2153FF0002FE4A /* PBXTargetDependency */ = {
+		A651F5521E215AC80002FE4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A651F47C1E1FCE8E0002FE4A /* DiaryApp */;
-			targetProxy = A651F4FD1E2153FF0002FE4A /* PBXContainerItemProxy */;
+			target = A651F4F71E2153FF0002FE4A /* DiaryAppTests */;
+			targetProxy = A651F5511E215AC80002FE4A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

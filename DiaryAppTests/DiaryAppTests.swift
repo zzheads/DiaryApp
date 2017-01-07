@@ -7,8 +7,10 @@
 //
 
 import XCTest
+@testable import DiaryApp
 
 class DiaryAppTests: XCTestCase {
+    let moc = CoreDataController.sharedInstance.managedObjectContext
     
     override func setUp() {
         super.setUp()
@@ -19,7 +21,14 @@ class DiaryAppTests: XCTestCase {
     }
     
     func testExample() {
-        let mood = Mood.mood(withTitle: "Bad")
-        XCTAssertNotNil(mood)
-    }    
+        do {
+            let entries = try self.moc.fetch(Entry.allEntriesRequest) as! [Entry]
+            for entry in entries {
+                NSLog("Entry: \(entry)")
+                self.moc.delete(entry)
+            }
+        } catch (let error) {
+            NSLog("\(error)")
+        }
+    }
 }
