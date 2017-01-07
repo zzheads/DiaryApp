@@ -11,8 +11,13 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var dataSource: EntryDataSource = {
-        let dataSource = EntryDataSource(fetchRequest: Entry.allEntriesRequest, tableView: self.tableView)
+        let dataSource = EntryDataSource(tableView: self.tableView, results: [])
         return dataSource
+    }()
+    
+    lazy var dataProvider: EntryDataProvider = {
+        let dataProvider = EntryDataProvider(delegate: self.dataSource)
+        return dataProvider
     }()
     
     lazy var tableView: UITableView = {
@@ -45,10 +50,9 @@ class ViewController: UIViewController {
             Entry.entry(withTitle: "Test entry5", text: "Some not long text of test entry", photo: photo, location: location, mood: mood)
         ]
 
-        let results = entries.flatMap { print("\($0.title)") }
-        print(results)
-        
-        self.tableView.dataSource = self.dataSource
+        print(entries)
+        self.tableView.delegate = self
+        self.dataProvider.perform(request: Entry.allEntriesRequest)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,5 +60,12 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let entry = self.dataSource.objectAt(indexPath: indexPath)
+        print(entry)
+    }
 }
 

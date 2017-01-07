@@ -29,6 +29,7 @@ class Entry: NSManagedObject {
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return request
     }()
+
 }
 
 extension Entry {

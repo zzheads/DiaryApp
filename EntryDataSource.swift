@@ -12,18 +12,17 @@ import CoreData
 
 class EntryDataSource: NSObject {
     let tableView: UITableView
-    let managedObjectContext = CoreDataController.sharedInstance.managedObjectContext
-    let fetchedResultsController: EntryFetchedResultsController
+    var results: [Entry]
     
-    init(fetchRequest: NSFetchRequest<NSFetchRequestResult>, tableView: UITableView) {
+    init(tableView: UITableView, results: [Entry]) {
         self.tableView = tableView
-        self.fetchedResultsController = EntryFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, tableView: tableView)
+        self.results = results
         super.init()
+        self.tableView.dataSource = self
     }
     
-    func performFetch(withPredicate predicate: NSPredicate?) {
-        self.fetchedResultsController.performFetch(withPredicate: predicate)
-        self.tableView.reloadData()
+    func objectAt(indexPath: IndexPath) -> Entry {
+        return self.results[indexPath.row]
     }
 }
 
@@ -31,21 +30,39 @@ class EntryDataSource: NSObject {
 
 extension EntryDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = fetchedResultsController.sections?[section] else {
-            return 0
-        }
-        return section.numberOfObjects
+        return self.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath)
-        let entry = fetchedResultsController.object(at: indexPath) as! Entry
+        let entry = objectAt(indexPath: indexPath)
         //cell.imageView?.image = entry.photo?.imageView.image
         cell.textLabel?.text = entry.title
         return cell
+    }
+}
+
+extension EntryDataSource: DataProviderDelegate {
+    func providerFailedWithError(error: Error) {
+        print("Provider failed with error: \(error)")
+    }
+    
+    func processUpdates(updates: [DataProviderUpdate<Entry>]) {
+        self.tableView.beginUpdates()
+        
+        for (index, update) in updates.enumerated() {
+            switch (update) {
+            case .Insert(let memo):
+                self.results.insert(memo, at: index)
+                let indexPath = IndexPath(row: index, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        }
+        
+        self.tableView.endUpdates()
     }
 }
