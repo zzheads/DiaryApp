@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(Mood)
 class Mood: NSManagedObject {
     static let entityName = "\(Mood.self)"
     
@@ -21,10 +22,4 @@ class Mood: NSManagedObject {
 
 extension Mood {
     @NSManaged var title: String
-}
-
-extension Mood {
-    override var description: String {
-        return "Mood: \(self.title)"
-    }
 }

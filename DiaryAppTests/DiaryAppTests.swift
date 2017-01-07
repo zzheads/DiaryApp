@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import DiaryApp
+//@testable import DiaryApp
 
 class DiaryAppTests: XCTestCase {
     var mood = Mood.mood(withTitle: "Happy")
