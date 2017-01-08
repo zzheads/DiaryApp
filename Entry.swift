@@ -43,7 +43,7 @@ class Entry: NSManagedObject {
         return entry
     }
     
-    func insert() {
+    public func insert() {
         let moc = CoreDataController.sharedInstance.managedObjectContext
         if (moc.registeredObject(for: self.objectID) == nil) {
             moc.insert(self)
@@ -70,23 +70,27 @@ extension Entry {
 extension Entry {
     var photoWithMood: UIImageView {
         var image: UIImage
-        var moodBadge: UIImage
+        var moodImage: UIImage
         
         if let photo = self.photo {
             image = photo.image
         } else {
             image = #imageLiteral(resourceName: "icn_picture")
         }
-        let imageView = UIImageView(image: image).circle
+        let imageView = UIImageView(image: image.makeSquare()).circle
         
         if let mood = self.mood {
-            moodBadge = mood.badge
+            moodImage = mood.badgeImage
         } else {
-            moodBadge = #imageLiteral(resourceName: "icn_noimage")
+            moodImage = #imageLiteral(resourceName: "icn_noimage")
         }
-        let moodView = UIImageView(image: moodBadge).circle
+        let moodView = UIImageView(image: moodImage)
         
+        let center = CGPoint(x: imageView.bounds.size.width*3/4, y: imageView.bounds.size.height*3/4)
+        moodView.center = center
         imageView.addSubview(moodView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
         return imageView
     }
 }

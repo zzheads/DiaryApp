@@ -56,7 +56,7 @@ extension Mood {
 }
 
 extension Mood {
-    var badge: UIImage {
+    var badgeImage: UIImage {
         guard let moodState = MoodState(rawValue: self.title) else {
             return #imageLiteral(resourceName: "icn_noimage")
         }

@@ -54,7 +54,8 @@ class DiaryAppTests: XCTestCase {
         } catch (let error) {
             NSLog("\(error)")
         }
-
+        
+        
         XCTAssert(!entry.isInserted)
         entry.insert()
         XCTAssert(entry.isInserted)

@@ -14,7 +14,7 @@ extension UIImageView {
         let circleImageView = self
         circleImageView.layer.borderWidth = 1
         circleImageView.layer.masksToBounds = false
-        circleImageView.layer.borderColor = UIColor.black.cgColor
+        circleImageView.layer.borderColor = UIColor.white.cgColor
         circleImageView.layer.cornerRadius = circleImageView.frame.height/2
         circleImageView.clipsToBounds = true
         return circleImageView
