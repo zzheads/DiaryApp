@@ -7,28 +7,57 @@
 //
 
 import XCTest
+import CoreData
 @testable import DiaryApp
 
 class DiaryAppTests: XCTestCase {
-    let moc = CoreDataController.sharedInstance.managedObjectContext
+    weak var moc: NSManagedObjectContext?
     
     override func setUp() {
         super.setUp()
+        self.moc = CoreDataController.sharedInstance.managedObjectContext
     }
     
     override func tearDown() {
+        self.moc = nil
         super.tearDown()
     }
     
-    func testExample() {
+    func testDatabaseReadWrite() {
+        guard
+        let moc = self.moc,
+        let mood = Mood(title: "Happy"),
+        let photo = Photo(image: #imageLiteral(resourceName: "icn_calendar")),
+        let loc = Location(latitude: 1.00, longitude: 2.00),
+        let entry = Entry(title: "Test_title", text: "Test_TEXT_TEXT", date: nil, photo: photo, location: loc, mood: mood)
+        else {
+            fatalError("moc=\(self.moc) Can not initialize!")
+        }
+        
+        moc.reset()
+        
         do {
-            let entries = try self.moc.fetch(Entry.allEntriesRequest) as! [Entry]
-            for entry in entries {
-                NSLog("Entry: \(entry)")
-                self.moc.delete(entry)
-            }
+            
+            try moc.save()
+            
+            let savedMoods = try moc.fetch(Mood.allMoodsRequest)
+            let savedLocations = try moc.fetch(Location.allLocationsRequest)
+            let savedPhotos = try moc.fetch(Photo.allPhotosRequest)
+            let savedEntries = try moc.fetch(Entry.allEntriesRequest)
+            
+            XCTAssert(savedMoods.count == 0, "Mood saved without calls moc.save!, savedMoods=\(savedMoods.count)")
+            XCTAssert(savedPhotos.count == 0, "Photo saved without calls moc.save!, savedPhotos=\(savedPhotos.count)")
+            XCTAssert(savedLocations.count == 0, "Location saved without calls moc.save!, savedLocations=\(savedLocations.count)")
+            XCTAssert(savedEntries.count == 0, "Entry saved without calls moc.save!, savedEntries=\(savedEntries.count)")
+            
+            
         } catch (let error) {
             NSLog("\(error)")
         }
+
+        XCTAssert(!entry.isInserted)
+        entry.insert()
+        XCTAssert(entry.isInserted)
+        
     }
 }

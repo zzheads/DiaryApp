@@ -14,6 +14,24 @@ import UIKit
 class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
     
+    convenience init?(title: String, text: String, date: Date?, photo: Photo?, location: Location?, mood: Mood?) {
+        let context = CoreDataController.sharedInstance.managedObjectContext
+        guard let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context) else {
+            return nil
+        }
+        self.init(entity: entity, insertInto: context)
+        self.title = title
+        self.text = text
+        if let date = date {
+            self.date = date
+        } else {
+            self.date = Date()
+        }
+        self.photo = photo
+        self.location = location
+        self.mood = mood
+    }
+    
     class func entry(withTitle title: String, text: String, photo: Photo?, location: Location?, mood: Mood?) -> Entry {
         let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataController.sharedInstance.managedObjectContext) as! Entry
         entry.title = title
@@ -25,8 +43,11 @@ class Entry: NSManagedObject {
         return entry
     }
     
-    func save() {
-        try! CoreDataController.sharedInstance.managedObjectContext.save()
+    func insert() {
+        let moc = CoreDataController.sharedInstance.managedObjectContext
+        if (moc.registeredObject(for: self.objectID) == nil) {
+            moc.insert(self)
+        }
     }
     
     static var allEntriesRequest: NSFetchRequest = { () -> NSFetchRequest<NSFetchRequestResult> in
@@ -94,5 +115,11 @@ extension Entry {
             textLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor)
             ])
         }
+    }
+}
+
+extension Entry {
+    var debugInfo: String {
+        return "Entry: id=\(self.objectID) title=\(self.title) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
     }
 }

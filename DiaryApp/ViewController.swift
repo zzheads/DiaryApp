@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -41,28 +42,26 @@ class ViewController: UIViewController {
         
         let moc = CoreDataController.sharedInstance.managedObjectContext
         
-//        let mood1 = Mood.mood(withTitle: "Bad")
-//        let mood2 = Mood(title: "Happy")
-//        let mood3 = Mood(title: "Average")
-//        let mood4 = Mood(title: "Strange")
-//        let location = Location.location(latitude: 10.0, longitude: 20.0)
-//        let photo = Photo.photo(withImage: UIImage(named: "icn_bad"))
+//        let loc = Location(latitude: 99.99, longitude: 88.88)
+//        let mood = Mood(title: "Happy")
+//        let photo = Photo(image: #imageLiteral(resourceName: "icn_write_post"))
+//        let entry2 = Entry(title: "OTHER_TITLE", text: "TEST_text_text_text_text_text", date: nil, photo: photo, location: loc, mood: mood)
 //        
 //        try! moc.save()
-//        
-//        let entries = [
-//            Entry.entry(withTitle: "Test entry1", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-//            Entry.entry(withTitle: "Test entry2", text: "Some not long text of test entry", photo: photo, location: location, mood: mood),
-//        ]
+        
+        let request = Photo.allPhotosRequest
         
         do {
-            let moods = try moc.fetch(Mood.allMoodsRequest) as! [Mood]
-            for mood in moods {
-                print("MOOD: id=\(mood.objectID) \(mood.title)")
+            let objects = try moc.fetch(request) as! [Photo]
+            for object in objects {
+                print("Obj: \(object)")
+                moc.delete(object)
             }
         } catch (let error) {
             print(error)
         }
+
+        try! moc.save()
         
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)
