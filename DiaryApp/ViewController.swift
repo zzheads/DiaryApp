@@ -23,8 +23,11 @@ class ViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
+        let nib = UINib(nibName: "EntryCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: EntryCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
         return tableView
     }()
     
@@ -32,8 +35,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let photo = Photo(image: #imageLiteral(resourceName: "photo"))
-        let mood = Mood(title: "Unknown")
-        let entry = Entry(title: "Test", text: "Text", date: Date(), photo: photo, location: nil, mood: mood)
+        let mood = Mood(title: "Happy")
+        let loc = Location(latitude: 99.8, longitude: 88.9)
+        let entry1 = Entry(title: "Saturday, 1st January", text: "I'm thinking this may be due to images having in the filename, such as the convention. SVN uses that symbol for revision syntax (to escape it when working with SVN in the command line, you simply add an at the end as the last occurrence is the one it uses to try and determine revision info). Simply running Update worked for me. When I added some new images, I actually had to manually select on the 2x/3x variants in the File Inspector pane as well. Weird.", date: Date(), photo: photo, location: loc, mood: mood)
+        
+        let entry2 = Entry(title: "Tuesday, 12th February", text: "I have a class called MyClass that is a subclass of UIView, that I want to initialise with a xib file. I am not sure how to initialise this class with the xib file called View.xib", date: Date(), photo: nil, location: loc, mood: Mood(title: "Bad"))
         
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
@@ -61,9 +67,9 @@ extension ViewController: UITableViewDelegate {
         print(self.dataSource.results)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let entry = self.dataSource.objectAt(indexPath: indexPath)
-        return entry.cell.bounds.size.height
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let cell = self.dataSource.objectAt(indexPath: indexPath).cell
+//        return cell.textUILabel.frame.height
+//    }
 }
 

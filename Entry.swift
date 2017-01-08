@@ -103,10 +103,7 @@ extension Entry {
 
 extension Entry {
     var cell: EntryCell {
-        let cell = EntryCell.instanceFromNib()
-        cell.photoView = self.photoWithMood
-        cell.titleLabel.text = self.title
-        cell.entryLabel.text = self.text
+        let cell = EntryCell.instanceFromNib(entry: self)
         return cell
     }
 }
