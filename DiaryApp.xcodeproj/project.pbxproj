@@ -30,6 +30,8 @@
 		A651F52B1E21565C0002FE4A /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4AC1E1FD46F0002FE4A /* CoreDataController.swift */; };
 		A651F5531E215AEF0002FE4A /* DiaryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4FA1E2153FF0002FE4A /* DiaryAppTests.swift */; };
 		A68317B31E22333D0097F588 /* UIImageView+Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68317B21E22333D0097F588 /* UIImageView+Square.swift */; };
+		A68317B71E22628A0097F588 /* EntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68317B61E22628A0097F588 /* EntryCell.xib */; };
+		A68317B91E22673E0097F588 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68317B81E22673E0097F588 /* EntryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		A651F52E1E2156A10002FE4A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A651F5301E2156AA0002FE4A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A68317B21E22333D0097F588 /* UIImageView+Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Square.swift"; sourceTree = "<group>"; };
+		A68317B61E22628A0097F588 /* EntryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryCell.xib; sourceTree = "<group>"; };
+		A68317B81E22673E0097F588 /* EntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,8 @@
 				A651F4B71E20DD960002FE4A /* List.png */,
 				A651F4B81E20DD960002FE4A /* Preview.png */,
 				A651F4B91E20DD960002FE4A /* Thumbnail.png */,
+				A68317B61E22628A0097F588 /* EntryCell.xib */,
+				A68317B81E22673E0097F588 /* EntryCell.swift */,
 			);
 			name = Design;
 			sourceTree = "<group>";
@@ -277,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A68317B71E22628A0097F588 /* EntryCell.xib in Resources */,
 				A651F4C01E20DD960002FE4A /* Thumbnail.png in Resources */,
 				A651F4BA1E20DD960002FE4A /* Detail.png in Resources */,
 				A651F48E1E1FCE8E0002FE4A /* LaunchScreen.storyboard in Resources */,
@@ -313,6 +320,7 @@
 				A651F4A91E1FD3900002FE4A /* DiaryApp.xcdatamodeld in Sources */,
 				A651F5221E21565C0002FE4A /* Mood.swift in Sources */,
 				A651F5251E21565C0002FE4A /* Entry.swift in Sources */,
+				A68317B91E22673E0097F588 /* EntryCell.swift in Sources */,
 				A651F5281E21565C0002FE4A /* QueryType.swift in Sources */,
 				A651F5231E21565C0002FE4A /* Location.swift in Sources */,
 				A68317B31E22333D0097F588 /* UIImageView+Square.swift in Sources */,
