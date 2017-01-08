@@ -22,7 +22,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psf-Hp-eAu">
                         <rect key="frame" x="98" y="49" width="259" height="177"/>
                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.60991841554641724" green="0.64468926191329956" blue="0.70984333753585815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ul6-Md-2bY">
@@ -38,7 +38,7 @@
                             <constraint firstAttribute="height" constant="21" id="7fl-oc-t0p"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.25018349289894104" green="0.30175313353538513" blue="0.43251273036003113" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6aw-SR-VYy">
@@ -55,13 +55,13 @@
                             <constraint firstAttribute="width" constant="30" id="cu4-Dw-X9l"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cej-Bq-39Q">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cej-Bq-39Q">
                         <rect key="frame" x="139" y="237" width="238" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="foY-9f-qvh"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.8050801157951355" green="0.77867370843887329" blue="0.79108291864395142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

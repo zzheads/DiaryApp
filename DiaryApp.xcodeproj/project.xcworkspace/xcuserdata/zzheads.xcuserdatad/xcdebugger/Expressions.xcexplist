@@ -3,10 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "Entry.cell.getter:Entry.swift">
+      </ContextState>
+      <ContextState
          contextName = "EntryDataSource.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
                value = "entry.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calculateHeightForCell(cell : EntryCell) -&gt; CGFloat:ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Entry.photoWithMood.getter:Entry.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static EntryCell.instanceFromNib(entry : Entry) -&gt; EntryCell:EntryCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.photo?.image">
+            </PersistentString>
+            <PersistentString
+               value = "entry.photo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

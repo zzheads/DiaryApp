@@ -26,8 +26,16 @@ class EntryCell: UITableViewCell {
         
         cell.entryTitleLabel.text = entry.title
         cell.entryTextLabel.text = entry.text
-        cell.photoImageView.image = entry.photo?.image
-        cell.moodBadgeImageView.image = entry.mood?.badgeImage
+        if let photo = entry.photo {
+            cell.photoImageView.image = photo.image
+        } else {
+            cell.photoImageView.image = #imageLiteral(resourceName: "icn_picture")
+        }
+        if let mood = entry.mood {
+            cell.moodBadgeImageView.image = mood.badgeImage
+        } else {
+            cell.moodBadgeImageView.image = #imageLiteral(resourceName: "icn_noimage")
+        }
         
         if let location = entry.location {
             cell.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")

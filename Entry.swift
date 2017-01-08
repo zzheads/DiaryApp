@@ -68,34 +68,6 @@ extension Entry {
 }
 
 extension Entry {
-    var photoWithMood: UIImageView {
-        var image: UIImage
-        var moodImage: UIImage
-        
-        if let photo = self.photo {
-            image = photo.image
-        } else {
-            image = #imageLiteral(resourceName: "icn_picture")
-        }
-        let imageView = UIImageView(image: image.makeSquare()).circle
-        
-        if let mood = self.mood {
-            moodImage = mood.badgeImage
-        } else {
-            moodImage = #imageLiteral(resourceName: "icn_noimage")
-        }
-        let moodView = UIImageView(image: moodImage)
-        
-        let center = CGPoint(x: imageView.bounds.size.width*3/4, y: imageView.bounds.size.height*3/4)
-        moodView.center = center
-        imageView.addSubview(moodView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-
-        return imageView
-    }
-}
-
-extension Entry {
     var debugInfo: String {
         return "Entry: id=\(self.objectID) title=\(self.title) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
     }
