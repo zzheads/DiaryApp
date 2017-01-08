@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(Entry.EntryCell.self, forCellReuseIdentifier: Entry.EntryCell.reuseIdentifier)
+        tableView.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -34,22 +34,14 @@ class ViewController: UIViewController {
         let photo = Photo(image: #imageLiteral(resourceName: "photo"))
         let mood = Mood(title: "Unknown")
         let entry = Entry(title: "Test", text: "Text", date: Date(), photo: photo, location: nil, mood: mood)
-        let imageView = entry?.photoWithMood
-        imageView?.translatesAutoresizingMaskIntoConstraints = false
-
-        self.view.addSubview(imageView!)
-        NSLayoutConstraint.activate([
-            imageView!.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            imageView!.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor)
-            ])
         
-//        self.view.addSubview(self.tableView)
-//        NSLayoutConstraint.activate([
-//            self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-//            self.tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-//            self.tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
-//            self.tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor)
-//            ])
+        self.view.addSubview(self.tableView)
+        NSLayoutConstraint.activate([
+            self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor)
+            ])
         
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)
@@ -67,6 +59,11 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(self.dataSource.results)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let entry = self.dataSource.objectAt(indexPath: indexPath)
+        return entry.cell.bounds.size.height
     }
 }
 

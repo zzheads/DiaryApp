@@ -96,34 +96,46 @@ extension Entry {
 }
 
 extension Entry {
-    class EntryCell: UITableViewCell {
-    static let reuseIdentifier = "\(EntryCell.self)"
-    
-    override func layoutSubviews() {
-        guard let imageView = self.imageView else {
-            return
-        }
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-            imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: self.bounds.size.width/6)
-            ])
-        
-        guard let textLabel = self.textLabel else {
-            return
-        }
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            textLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor),
-            textLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor)
-            ])
-        }
-    }
-}
-
-extension Entry {
     var debugInfo: String {
         return "Entry: id=\(self.objectID) title=\(self.title) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
     }
 }
+
+extension Entry {
+    var cell: EntryCell {
+        let cell = EntryCell.instanceFromNib()
+        cell.photoView = self.photoWithMood
+        cell.titleLabel.text = self.title
+        cell.entryLabel.text = self.text
+        return cell
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
