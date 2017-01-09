@@ -20,28 +20,33 @@ class EntryCell: UITableViewCell {
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var entryLocationLabel: UILabel!
     
-    class func instanceFromNib(entry: Entry) -> EntryCell {
+    class func instanceFromNib() -> EntryCell {
         let cell = UINib(nibName: "EntryCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryCell
         cell.photoImageView.makeCircle()
-        
-        cell.entryTitleLabel.text = entry.date.formattedString
-        cell.entryTextLabel.text = entry.text
+        return cell
+    }
+    
+    override func awakeFromNib() {
+        self.photoImageView.makeCircle()
+    }
+    
+    func setupWith(entry: Entry) {
+        self.entryTitleLabel.text = entry.date.formattedString
+        self.entryTextLabel.text = entry.text
         if let photo = entry.photo {
-            cell.photoImageView.image = photo.image
+            self.photoImageView.image = photo.image
         } else {
-            cell.photoImageView.image = #imageLiteral(resourceName: "icn_picture")
+            self.photoImageView.image = #imageLiteral(resourceName: "icn_picture")
         }
         if let mood = entry.mood {
-            cell.moodBadgeImageView.image = mood.badgeImage
+            self.moodBadgeImageView.image = mood.badgeImage
         } else {
-            cell.moodBadgeImageView.image = #imageLiteral(resourceName: "icn_noimage")
+            self.moodBadgeImageView.image = #imageLiteral(resourceName: "icn_noimage")
         }
         
         if let location = entry.location {
-            cell.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")
-            cell.entryLocationLabel.text = location.placemark
+            self.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")
+            self.entryLocationLabel.text = location.placemark
         }
-        
-        return cell
     }
 }

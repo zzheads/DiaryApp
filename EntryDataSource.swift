@@ -24,6 +24,12 @@ class EntryDataSource: NSObject {
     func objectAt(indexPath: IndexPath) -> Entry {
         return self.results[indexPath.row]
     }
+    
+    func cellAt(indexPath: IndexPath) -> EntryCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath) as! EntryCell
+        cell.setupWith(entry: objectAt(indexPath: indexPath))
+        return cell
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -38,7 +44,7 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return results[indexPath.row].cell
+        return cellAt(indexPath: indexPath)
     }
 }
 

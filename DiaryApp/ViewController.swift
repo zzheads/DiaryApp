@@ -23,8 +23,7 @@ class ViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        let nib = UINib(nibName: "EntryCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: EntryCell.reuseIdentifier)
+        tableView.register(UINib(nibName: "EntryCell", bundle: nil), forCellReuseIdentifier: EntryCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40

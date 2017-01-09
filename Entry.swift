@@ -79,13 +79,6 @@ extension Entry {
     }
 }
 
-extension Entry {
-    var cell: UITableViewCell {
-        return EntryCell.instanceFromNib(entry: self)
-    }
-}
-
-
 
 
 
