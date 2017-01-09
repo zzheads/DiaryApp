@@ -12,11 +12,30 @@ import CoreData
 
 class EntryDataSource: NSObject {
     let tableView: UITableView
-    var results: [Entry]
+    var count: Int
+    var results: [Entry] {
+        
+        // For debug only, same with self.count variable, after debug - remove it and observers
+        willSet {
+            self.count = self.results.count
+        }
+        didSet {
+            if (self.results.count > self.count) {
+                print("Added \(self.results.count - self.count) entries")
+            }
+            if (self.results.count < self.count) {
+                print("Removed \(self.count - self.results.count) entries")
+            }
+            if (self.results.count == self.count) {
+                print("Strange, results changed but count is the same")
+            }
+        }
+    }
     
     init(tableView: UITableView, results: [Entry]) {
         self.tableView = tableView
         self.results = results
+        self.count = 0
         super.init()
         self.tableView.dataSource = self
     }
