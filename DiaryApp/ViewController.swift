@@ -33,13 +33,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let photo = Photo(image: #imageLiteral(resourceName: "photo"))
         let mood = Mood(title: "Happy")
-        let loc = Location(latitude: 99.8, longitude: 88.9)
-        let entry1 = Entry(title: "Saturday, 1st January", text: "I'm thinking this may be due to images having in the filename, such as the convention. SVN uses that symbol for revision syntax (to escape it when working with SVN in the command line, you simply add an at the end as the last occurrence is the one it uses to try and determine revision info). Simply running Update worked for me. When I added some new images, I actually had to manually select on the 2x/3x variants in the File Inspector pane as well. Weird.", date: Date(), photo: photo, location: loc, mood: mood)
+        let loc2 = Location(clLocation: LocationManager().location!) { (placemarks, error) in
+            self.tableView.reloadData()
+        }
+        let loc1 = Location(latitude: 40.787, longitude: -74.01) { (placemarks, error) in
+            self.tableView.reloadData()
+        }
         
-        let entry2 = Entry(title: "Tuesday, 12th February", text: "I have a class called MyClass that is a subclass of UIView, that I want to initialise with a xib file. I am not sure how to initialise this class with the xib file called View.xib", date: Date(), photo: nil, location: loc, mood: Mood(title: "Bad"))
+        let entry0 = Entry(title: "Bla Bla Bla", text: "Record your thoughts for today", date: Date(), photo: nil, location: nil, mood: nil)
+        let entry1 = Entry(title: "Saturday, 1st January", text: "I'm thinking this may be due to images having in the filename, such as the convention. SVN uses that symbol for revision syntax (to escape it when working with SVN in the command line, you simply add an at the end as the last occurrence is the one it uses to try and determine revision info). Simply running Update worked for me. When I added some new images, I actually had to manually select on the 2x/3x variants in the File Inspector pane as well. Weird.", date: Date(), photo: photo, location: loc1, mood: mood)
+        
+        let entry2 = Entry(title: "Tuesday, 12th February", text: "I have a class called MyClass that is a subclass of UIView, that I want to initialise with a xib file. I am not sure how to initialise this class with the xib file called View.xib", date: Date(), photo: nil, location: loc2, mood: Mood(title: "Bad"))
+        
         
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
@@ -64,12 +72,11 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(self.dataSource.results)
+        if let placemark = self.dataSource.results[indexPath.row].location?.placemark {
+            print("Placemark: \(placemark)")
+        } else {
+            print("There is no placemark")
+        }
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let cell = self.dataSource.objectAt(indexPath: indexPath).cell
-//        return cell.textUILabel.frame.height
-//    }
 }
 

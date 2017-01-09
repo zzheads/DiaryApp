@@ -50,12 +50,18 @@ class Entry: NSManagedObject {
         }
     }
     
-    static var allEntriesRequest: NSFetchRequest = { () -> NSFetchRequest<NSFetchRequestResult> in
+    static let allEntriesRequest: NSFetchRequest = { () -> NSFetchRequest<NSFetchRequestResult> in
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entry.entityName)
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return request
     }()
-
+    
+    class func entriesWithTitle(title: String) -> NSFetchRequest<NSFetchRequestResult> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entry.entityName)
+        let predicate = NSPredicate(format: "title = %@", title)
+        request.predicate = predicate
+        return request
+    }
 }
 
 extension Entry {
@@ -74,13 +80,10 @@ extension Entry {
 }
 
 extension Entry {
-    var cell: EntryCell {
-        let cell = EntryCell.instanceFromNib(entry: self)
-        return cell
+    var cell: UITableViewCell {
+        return EntryCell.instanceFromNib(entry: self)
     }
 }
-
-
 
 
 

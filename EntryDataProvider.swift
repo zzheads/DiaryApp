@@ -16,12 +16,31 @@ protocol DataProviderDelegate: class {
 
 enum DataProviderUpdate<T> {
     case Insert(T)
+    case Remove(T)
+    case Update(T)
+    
+    var mode: NSFetchedResultsChangeType {
+        switch self {
+        case .Insert: return .insert
+        case .Remove: return .delete
+        case .Update: return .update
+        }
+    }
+    
+    func nsMode(update: NSFetchedResultsChangeType, entry: Entry) -> DataProviderUpdate<Entry>? {
+        switch update {
+        case .delete: return .Remove(entry)
+        case .insert: return .Insert(entry)
+        case .update: return .Update(entry)
+        default: return nil
+        }
+    }
 }
 
 class EntryDataProvider {
     let managedObjectContext = CoreDataController.sharedInstance.managedObjectContext
     let coordinator = CoreDataController.sharedInstance.persistentStoreCoordinator
-    var updates = [DataProviderUpdate<Entry>]()
+    var updates = [DataProviderUpdate<Entry>]() 
     
     private weak var delegate: DataProviderDelegate?
     
@@ -55,8 +74,8 @@ class EntryDataProvider {
     private func processResult(result: Result<[Entry]>) {
         DispatchQueue.main.async {
             switch result {
-            case .Success(let memos):
-                self.updates = memos.map { DataProviderUpdate.Insert($0) }
+            case .Success(let entries):
+                self.updates = entries.map { DataProviderUpdate.Insert($0) }
                 guard let delegate = self.delegate else {
                     return
                 }
@@ -74,8 +93,8 @@ class EntryDataProvider {
     private func processResult(result: Result<Entry>) {
         DispatchQueue.main.async {
             switch result {
-            case .Success(let memo):
-                self.updates = [DataProviderUpdate.Insert(memo)]
+            case .Success(let entry):
+                self.updates = [DataProviderUpdate.Insert(entry)]
                 guard let delegate = self.delegate else {
                     return
                 }

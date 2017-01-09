@@ -34,13 +34,11 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: Entry.EntryCell.reuseIdentifier, for: indexPath)
-        let entry = objectAt(indexPath: indexPath)
-        return entry.cell
+        return results[indexPath.row].cell
     }
 }
 
@@ -54,10 +52,12 @@ extension EntryDataSource: DataProviderDelegate {
         
         for (index, update) in updates.enumerated() {
             switch (update) {
-            case .Insert(let memo):
-                self.results.insert(memo, at: index)
+            case .Insert(let entry):
+                self.results.insert(entry, at: index)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
+            case .Remove(_): break
+            case .Update(_): break
             }
         }
         

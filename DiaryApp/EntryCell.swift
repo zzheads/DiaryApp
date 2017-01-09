@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class EntryCell: UITableViewCell {
     static let reuseIdentifier = "\(EntryCell.self)"
@@ -21,10 +22,9 @@ class EntryCell: UITableViewCell {
     
     class func instanceFromNib(entry: Entry) -> EntryCell {
         let cell = UINib(nibName: "EntryCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryCell
-        cell.photoImageView.layer.cornerRadius = cell.photoImageView.frame.size.width/2
-        cell.photoImageView.layer.masksToBounds = true
+        cell.photoImageView.makeCircle()
         
-        cell.entryTitleLabel.text = entry.title
+        cell.entryTitleLabel.text = entry.date.formattedString
         cell.entryTextLabel.text = entry.text
         if let photo = entry.photo {
             cell.photoImageView.image = photo.image
@@ -39,7 +39,7 @@ class EntryCell: UITableViewCell {
         
         if let location = entry.location {
             cell.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")
-            cell.entryLocationLabel.text = location.description
+            cell.entryLocationLabel.text = location.placemark
         }
         
         return cell

@@ -8,12 +8,15 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 @objc(Location)
 class Location: NSManagedObject {
     static let entityName = "\(Location.self)"
+    var placemark: String = ""
+    let manager = LocationManager()
     
-    convenience init?(latitude: Double, longitude: Double) {
+    convenience init?(latitude: Double, longitude: Double, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
         let context = CoreDataController.sharedInstance.managedObjectContext
         guard let entity = NSEntityDescription.entity(forEntityName: Location.entityName, in: context) else {
             return nil
@@ -21,6 +24,23 @@ class Location: NSManagedObject {
         self.init(entity: entity, insertInto: context)
         self.latitude = latitude
         self.longitude = longitude
+
+        self.manager.getPlacemarks(location: self.clLoc) { (placemarks, error) in
+            if let placemarks = placemarks {
+                if let placemark = placemarks.first {
+                    self.placemark = placemark.myDescription
+                } else {
+                    if let error = error {
+                        self.placemark = "\(error)"
+                    }
+                }
+            }
+            completion(placemarks, error)
+        }
+    }
+    
+    convenience init?(clLocation: CLLocation, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
+        self.init(latitude: clLocation.coordinate.latitude, longitude: clLocation.coordinate.longitude, completion: completion)
     }
     
     class func location(latitude: Double, longitude: Double) -> Location {
@@ -39,4 +59,10 @@ class Location: NSManagedObject {
 extension Location {
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
+}
+
+extension Location {
+    var clLoc: CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
+    }
 }

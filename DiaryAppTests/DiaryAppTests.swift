@@ -61,4 +61,11 @@ class DiaryAppTests: XCTestCase {
         XCTAssert(entry.isInserted)
         
     }
+    
+    func testDateToFormattedString() {
+        let date = Date()
+        let message = "FORMATTED STRING IS: \(date.formattedString)"
+        NSLog(message)
+        print(">>>"+message)
+    }
 }
