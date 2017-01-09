@@ -16,25 +16,8 @@ protocol DataProviderDelegate: class {
 
 enum DataProviderUpdate<T> {
     case Insert(T)
-    case Remove(T)
-    case Update(T)
-    
-    var mode: NSFetchedResultsChangeType {
-        switch self {
-        case .Insert: return .insert
-        case .Remove: return .delete
-        case .Update: return .update
-        }
-    }
-    
-    func nsMode(update: NSFetchedResultsChangeType, entry: Entry) -> DataProviderUpdate<Entry>? {
-        switch update {
-        case .delete: return .Remove(entry)
-        case .insert: return .Insert(entry)
-        case .update: return .Update(entry)
-        default: return nil
-        }
-    }
+    case Remove(IndexPath)
+    case Change(T, IndexPath)
 }
 
 class EntryDataProvider {

@@ -21,12 +21,26 @@ class ViewController: UIViewController {
         return dataProvider
     }()
     
+    lazy var swipeLeftGestureRecognizer: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRight(recognizer:)))
+        recognizer.direction = .left
+        return recognizer
+    }()
+    
+    lazy var swipeRightGestureRecognizer: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRight(recognizer:)))
+        recognizer.direction = .right
+        return recognizer
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UINib(nibName: "EntryCell", bundle: nil), forCellReuseIdentifier: EntryCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
+        tableView.addGestureRecognizer(self.swipeLeftGestureRecognizer)
+        tableView.addGestureRecognizer(self.swipeRightGestureRecognizer)
         return tableView
     }()
     
@@ -75,6 +89,40 @@ extension ViewController: UITableViewDelegate {
             print("Placemark: \(placemark)")
         } else {
             print("There is no placemark")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        guard
+            let cell = tableView.cellForRow(at: indexPath)
+            else {
+            return .none
+        }
+        if cell.isEditing {
+            return .delete
+        }
+        return .none
+    }    
+}
+
+extension ViewController {
+    func swipeRight(recognizer: UISwipeGestureRecognizer) {
+        let location = recognizer.location(in: self.tableView)
+        guard let indexPath = self.tableView.indexPathForRow(at: location) else {
+            return
+        }
+        let cell = self.tableView.cellForRow(at: indexPath)
+        switch (recognizer.direction) {
+        case UISwipeGestureRecognizerDirection.right:
+            cell?.setEditing(true, animated: true)
+            self.tableView.setEditing(true, animated: true)
+
+        case UISwipeGestureRecognizerDirection.left:
+            cell?.setEditing(false, animated: true)
+            self.tableView.setEditing(false, animated: true)
+            
+        default:
+            break
         }
     }
 }

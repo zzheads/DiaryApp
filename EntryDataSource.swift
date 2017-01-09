@@ -32,7 +32,7 @@ class EntryDataSource: NSObject {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UITableViewDataSource
 
 extension EntryDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -45,6 +45,24 @@ extension EntryDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellAt(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            let updates = [DataProviderUpdate<Entry>.Remove(indexPath)]
+            processUpdates(updates: updates)
+            tableView.setEditing(false, animated: true)
+        case .insert:
+            guard let newEntry = Entry(title: "", text: "", date: Date(), photo: nil, location: nil, mood: nil) else {
+                return
+            }
+            let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
+            processUpdates(updates: updates)
+            tableView.setEditing(false, animated: true)
+        case .none:
+            return
+        }
     }
 }
 
@@ -62,8 +80,12 @@ extension EntryDataSource: DataProviderDelegate {
                 self.results.insert(entry, at: index)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
-            case .Remove(_): break
-            case .Update(_): break
+            case .Remove(let indexPath):
+                self.results.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            case .Change(let entry, let indexPath):
+                self.results[indexPath.row] = entry
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
         
