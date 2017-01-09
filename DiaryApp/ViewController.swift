@@ -49,6 +49,13 @@ class ViewController: UIViewController {
         let entry2 = Entry(title: "Tuesday, 12th February", text: "I have a class called MyClass that is a subclass of UIView, that I want to initialise with a xib file. I am not sure how to initialise this class with the xib file called View.xib", date: Date(), photo: nil, location: loc2, mood: Mood(title: "Bad"))
         
         
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    override func viewWillLayoutSubviews() {
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
             self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
@@ -59,13 +66,6 @@ class ViewController: UIViewController {
         
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    override func viewWillLayoutSubviews() {
     }
 
 }

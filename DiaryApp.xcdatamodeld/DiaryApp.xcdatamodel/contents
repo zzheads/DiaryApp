@@ -11,6 +11,7 @@
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="placemark" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="entries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="location" inverseEntity="Entry" syncable="YES"/>
     </entity>
     <entity name="Mood" representedClassName="Mood" syncable="YES">
@@ -22,9 +23,9 @@
         <relationship name="entries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="photo" inverseEntity="Entry" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Mood" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Location" positionX="-54" positionY="0" width="128" height="90"/>
-        <element name="Photo" positionX="-36" positionY="27" width="128" height="75"/>
         <element name="Entry" positionX="-18" positionY="36" width="128" height="135"/>
+        <element name="Location" positionX="-54" positionY="0" width="128" height="105"/>
+        <element name="Mood" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Photo" positionX="-36" positionY="27" width="128" height="75"/>
     </elements>
 </model>

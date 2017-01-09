@@ -13,8 +13,7 @@ import CoreLocation
 @objc(Location)
 class Location: NSManagedObject {
     static let entityName = "\(Location.self)"
-    var placemark: String = ""
-    let manager = LocationManager()
+    private let manager = LocationManager()
     
     convenience init?(latitude: Double, longitude: Double, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
         let context = CoreDataController.sharedInstance.managedObjectContext
@@ -59,6 +58,7 @@ class Location: NSManagedObject {
 extension Location {
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
+    @NSManaged var placemark: String
 }
 
 extension Location {
