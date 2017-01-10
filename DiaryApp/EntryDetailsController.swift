@@ -22,6 +22,51 @@ class EntryDetailsController: UIViewController {
     @IBOutlet weak var moodBadgeView: UIImageView!
     @IBOutlet weak var locationView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBAction func addLocationPressed() {
+        let manager = LocationManager()
+        guard
+            let location = manager.location,
+            let entry = self.entry
+            else {
+                print("Something is nil, entry=\(self.entry), location=\(manager.location)")
+                return
+        }
+        entry.location = Location(clLocation: location) { (placemarks, error) in
+            guard
+                let placemarks = placemarks,
+                let placemark = placemarks.first
+                else {
+                return
+            }
+            self.locationButton.isHidden = true
+            self.locationLabel.text = placemark.myDescription
+            self.locationLabel.isHidden = false
+        }
+    }
+    @IBAction func badMoodPressed() {
+        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_bad")
+        guard let entry = self.entry else {
+            return
+        }
+        entry.mood = Mood(title: "Bad")
+    }
+    @IBAction func averageMoodPressed() {
+        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_average")
+        guard let entry = self.entry else {
+            return
+        }
+        entry.mood = Mood(title: "Average")
+    }
+    @IBAction func goodMoodPressed() {
+        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_happy")
+        guard let entry = self.entry else {
+            return
+        }
+        entry.mood = Mood(title: "Happy")
+    }
+    
     
     class func loadFromNib(entry: Entry) -> EntryDetailsController{
         let controller = UINib(nibName: EntryDetailsController.nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryDetailsController
@@ -53,6 +98,8 @@ class EntryDetailsController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.photoImage.makeCircle()
+        self.locationLabel.isHidden = true
+        self.locationButton.isHidden = false
     }
     
     override func viewDidLoad() {

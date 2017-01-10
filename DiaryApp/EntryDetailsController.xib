@@ -69,6 +69,9 @@
                         <state key="normal" title="Bad">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <connections>
+                            <action selector="badMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="gSt-Bx-oSl"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-FE-nQd">
                         <rect key="frame" x="249" y="318" width="110" height="30"/>
@@ -81,6 +84,9 @@
                         <state key="normal" title="Good">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <connections>
+                            <action selector="goodMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="ewl-df-AAf"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8o-Em-o9M">
                         <rect key="frame" x="126" y="318.5" width="123" height="30"/>
@@ -92,6 +98,9 @@
                         <state key="normal" title="Average">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <connections>
+                            <action selector="averageMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="ABR-ed-e3g"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-Pm-zoF">
                         <rect key="frame" x="132" y="272.5" width="227" height="30"/>
@@ -109,7 +118,19 @@
                                 </fragment>
                             </attributedString>
                         </state>
+                        <connections>
+                            <action selector="addLocationPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="jCN-WL-LGR"/>
+                        </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tf-8w-JZw">
+                        <rect key="frame" x="132" y="280" width="227" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="th1-Li-cYK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                        <color key="textColor" red="0.61467653509999998" green="0.60105043650000001" blue="0.62874418499999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -119,6 +140,7 @@
                     <constraint firstItem="Mah-Vu-48v" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="92" id="61L-fZ-mfS"/>
                     <constraint firstItem="ewL-KU-9Hu" firstAttribute="leading" secondItem="QvB-m8-MEU" secondAttribute="trailing" constant="16" id="Brx-uu-7sd"/>
                     <constraint firstItem="9gs-PR-k0l" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="16" id="CNo-Po-pjE"/>
+                    <constraint firstAttribute="trailing" secondItem="2tf-8w-JZw" secondAttribute="trailing" constant="16" id="CSR-ox-575"/>
                     <constraint firstItem="ewL-KU-9Hu" firstAttribute="top" secondItem="9gs-PR-k0l" secondAttribute="bottom" constant="16" id="E8T-3U-6Tp"/>
                     <constraint firstItem="QvB-m8-MEU" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="16" id="Ejc-8b-Im2"/>
                     <constraint firstItem="A8o-Em-o9M" firstAttribute="top" secondItem="u5R-Pm-zoF" secondAttribute="bottom" constant="16" id="JkI-ke-NZv"/>
@@ -131,8 +153,10 @@
                     <constraint firstItem="Mah-Vu-48v" firstAttribute="top" secondItem="ewL-KU-9Hu" secondAttribute="bottom" constant="16" id="ePN-IU-Sal"/>
                     <constraint firstItem="QvB-m8-MEU" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="hrF-ff-rR9"/>
                     <constraint firstItem="JhV-GX-Bbi" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="kpd-YR-6ms"/>
+                    <constraint firstItem="B6l-FE-nQd" firstAttribute="top" secondItem="2tf-8w-JZw" secondAttribute="bottom" constant="17" id="q1y-Tv-Z3i"/>
                     <constraint firstAttribute="trailing" secondItem="ewL-KU-9Hu" secondAttribute="trailing" constant="16" id="tJ4-0J-KdD"/>
                     <constraint firstItem="u5R-Pm-zoF" firstAttribute="leading" secondItem="Mah-Vu-48v" secondAttribute="trailing" constant="16" id="vOm-YE-doX"/>
+                    <constraint firstItem="2tf-8w-JZw" firstAttribute="leading" secondItem="Mah-Vu-48v" secondAttribute="trailing" constant="16" id="xVn-Bh-2nF"/>
                     <constraint firstItem="Bx9-cp-htD" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="50" id="yYi-sj-pU2"/>
                     <constraint firstItem="9gs-PR-k0l" firstAttribute="leading" secondItem="QvB-m8-MEU" secondAttribute="trailing" constant="16" id="ybo-yt-vmV"/>
                     <constraint firstItem="B6l-FE-nQd" firstAttribute="centerY" secondItem="bBv-0q-oBn" secondAttribute="centerY" id="zG5-xu-BUm"/>
@@ -143,6 +167,7 @@
                 <outlet property="badButton" destination="JhV-GX-Bbi" id="vHV-58-7qf"/>
                 <outlet property="goodButton" destination="B6l-FE-nQd" id="CiP-IW-JUl"/>
                 <outlet property="locationButton" destination="u5R-Pm-zoF" id="eVf-18-qCn"/>
+                <outlet property="locationLabel" destination="2tf-8w-JZw" id="8Zz-Ie-Izv"/>
                 <outlet property="locationView" destination="Mah-Vu-48v" id="jPE-Cy-u9e"/>
                 <outlet property="moodBadgeView" destination="Bx9-cp-htD" id="U6N-z4-mE0"/>
                 <outlet property="photoImage" destination="QvB-m8-MEU" id="dxC-j7-2fK"/>

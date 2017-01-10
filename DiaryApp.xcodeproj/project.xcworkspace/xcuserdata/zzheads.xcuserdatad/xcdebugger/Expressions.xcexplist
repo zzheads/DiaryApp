@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EntryDetailsController.(addLocationPressed() -&gt; ()).(closure #1):EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "placemark.myDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static EntryCell.instanceFromNib(entry : Entry) -&gt; EntryCell:EntryCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -64,6 +72,14 @@
          contextName = "Entry.photoWithMood.getter:Entry.swift">
       </ContextState>
       <ContextState
+         contextName = "EntryDetailsController.addLocationPressed() -&gt; ():EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "manager.location">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryDataSource.init(tableView : UITableView, results : [Entry]) -&gt; EntryDataSource:EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
@@ -95,6 +111,17 @@
          <PersistentStrings>
             <PersistentString
                value = "placemark.myDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LocationManager.location.getter:LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.manager.location">
+            </PersistentString>
+            <PersistentString
+               value = "self.manager">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
