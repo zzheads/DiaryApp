@@ -92,13 +92,13 @@ class ViewController: UIViewController {
 
 }
 
-
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return
         }
-        cell.setEditing(true, animated: true)
+        let detailsController = EntryDetailsController.loadFromNib(entry: self.dataSource.objectAt(indexPath: indexPath))
+        self.navigationController?.pushViewController(detailsController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
