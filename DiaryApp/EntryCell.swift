@@ -37,8 +37,8 @@ class EntryCell: UITableViewCell {
     }
     
     func setupWith(entry: Entry) {
-        let mirror = Mirror(reflecting: entry)
-        print("Class of object - \(mirror), \(entry.debugInfo), \(entry.date)")
+//        let mirror = Mirror(reflecting: entry)
+//        print("Class of object - \(mirror), \(entry.debugInfo), \(entry.date)")
         self.entryTitleLabel.text = entry.date.formattedString
         self.entryTextLabel.text = entry.text
         if let photo = entry.photo {
