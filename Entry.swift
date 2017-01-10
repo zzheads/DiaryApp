@@ -14,6 +14,8 @@ import UIKit
 class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
     
+    static let emptyInstance = Entry.entry(withTitle: "", text: "Record your thoughts for today", photo: nil, location: nil, mood: nil)
+    
     convenience init?(title: String, text: String, date: Date?, photo: Photo?, location: Location?, mood: Mood?) {
         let context = CoreDataController.sharedInstance.managedObjectContext
         guard let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context) else {
@@ -78,8 +80,6 @@ extension Entry {
         return "Entry: id=\(self.objectID) title=\(self.title) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
     }
 }
-
-
 
 
 

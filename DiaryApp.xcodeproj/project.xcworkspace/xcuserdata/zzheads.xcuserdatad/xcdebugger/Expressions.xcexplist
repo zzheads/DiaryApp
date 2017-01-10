@@ -6,10 +6,35 @@
          contextName = "Entry.photoWithMood.getter:Entry.swift">
       </ContextState>
       <ContextState
+         contextName = "EntryCell.setupWith(entry : Entry) -&gt; ():EntryCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.photo">
+            </PersistentString>
+            <PersistentString
+               value = "entry.mood">
+            </PersistentString>
+            <PersistentString
+               value = "entry.date">
+            </PersistentString>
+            <PersistentString
+               value = "entry.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryDataSource.processUpdates(updates : [DataProviderUpdate&lt;Entry&gt;]) -&gt; ():EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.results[index].title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EntryDataSource.init(tableView : UITableView, results : [Entry]) -&gt; EntryDataSource:EntryDataSource.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.emptyEntry.date">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

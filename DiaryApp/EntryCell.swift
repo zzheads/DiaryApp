@@ -20,17 +20,25 @@ class EntryCell: UITableViewCell {
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var entryLocationLabel: UILabel!
     
-    class func instanceFromNib() -> EntryCell {
+    class func promptingInstance() -> EntryCell {
         let cell = UINib(nibName: "EntryCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryCell
         cell.photoImageView.makeCircle()
+        cell.textLabel?.text = "Record your thoughts for today"
         return cell
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.photoImageView.makeCircle()
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
     func setupWith(entry: Entry) {
+        let mirror = Mirror(reflecting: entry)
+        print("Class of object - \(mirror), \(entry.debugInfo), \(entry.date)")
         self.entryTitleLabel.text = entry.date.formattedString
         self.entryTextLabel.text = entry.text
         if let photo = entry.photo {

@@ -12,10 +12,10 @@ import CoreData
 
 class EntryDataSource: NSObject {
     let tableView: UITableView
+
     var count: Int
     var results: [Entry] {
-        
-        // For debug only, same with self.count variable, after debug - remove it and observers
+        // For debug purposes only, same with self.count variable, after debug - remove it and observers
         willSet {
             self.count = self.results.count
         }
@@ -43,12 +43,6 @@ class EntryDataSource: NSObject {
     func objectAt(indexPath: IndexPath) -> Entry {
         return self.results[indexPath.row]
     }
-    
-    func cellAt(indexPath: IndexPath) -> EntryCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath) as! EntryCell
-        cell.setupWith(entry: objectAt(indexPath: indexPath))
-        return cell
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -63,7 +57,10 @@ extension EntryDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellAt(indexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier, for: indexPath) as! EntryCell
+        cell.setupWith(entry: objectAt(indexPath: indexPath))
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
