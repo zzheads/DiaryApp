@@ -45,7 +45,10 @@ class MediaPickerManager: NSObject {
 
 extension MediaPickerManager: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        delegate?.mediaPickerManager(manager: self, didFinishPickingImage: image)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            delegate?.mediaPickerManager(manager: self, didFinishPickingImage: image)
+        } else {
+            print("SOMETHING GOES WRONG HERE")
+        }
     }
 }

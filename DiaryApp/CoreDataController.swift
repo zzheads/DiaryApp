@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class CoreDataController {
-    
     static let sharedInstance = CoreDataController()
     
     static func save() {

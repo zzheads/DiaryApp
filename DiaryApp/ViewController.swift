@@ -60,6 +60,10 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
         
+        self.tableView.delegate = self
+        self.dataProvider.perform(request: Entry.allEntriesRequest)
+
+        
 //        let entry1 = Entry(title: "Saturday, 1st January", text: "I'm thinking this may be due to images having in the filename, such as the convention. SVN uses that symbol for revision syntax (to escape it when working with SVN in the command line, you simply add an at the end as the last occurrence is the one it uses to try and determine revision info). Simply running Update worked for me. When I added some new images, I actually had to manually select on the 2x/3x variants in the File Inspector pane as well. Weird.", date: Date(), photo: photo, location: loc1, mood: mood)
 //        
 //        let entry2 = Entry(title: "Tuesday, 12th February", text: "I have a class called MyClass that is a subclass of UIView, that I want to initialise with a xib file. I am not sure how to initialise this class with the xib file called View.xib", date: Date(), photo: nil, location: loc2, mood: Mood(title: "Bad"))
@@ -86,15 +90,16 @@ class ViewController: UIViewController {
             self.tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor)
             ])
         
-        self.tableView.delegate = self
-        self.dataProvider.perform(request: Entry.allEntriesRequest)
     }
 
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailsController = EntryDetailsController.loadFromNib(entry: self.dataSource.objectAt(indexPath: indexPath))
+        let entry = self.dataSource.objectAt(indexPath: indexPath)
+        let detailsController = EntryDetailsController.loadFromNib(entry: entry, indexPath: indexPath)
+        detailsController.delegate = self
+        print("In viewcontr registered objs: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
         self.navigationController?.pushViewController(detailsController, animated: true)
     }
     
@@ -135,6 +140,13 @@ extension ViewController {
     func addRecord(sender: UIBarButtonItem) {
         let updates = DataProviderUpdate<Entry>.Insert(Entry.emptyInstance)
         self.dataSource.processUpdates(updates: [updates])
+    }
+}
+
+extension ViewController: EntryDetailsControllerDelegate {
+    func entryDetailsController(didFinishModifyEntry entry: Entry, at indexPath: IndexPath) {
+        let update = DataProviderUpdate<Entry>.Change(entry, indexPath)
+        self.dataSource.processUpdates(updates: [update])
     }
 }
 

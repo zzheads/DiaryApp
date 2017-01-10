@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+protocol EntryDetailsControllerDelegate: class {
+    func entryDetailsController(didFinishModifyEntry entry: Entry, at indexPath: IndexPath)
+}
+
 class EntryDetailsController: UIViewController {
     static let nibName = "\(EntryDetailsController.self)"
     var entry: Entry? = nil
+    var indexPath: IndexPath? = nil
+    var delegate: EntryDetailsControllerDelegate?
     
     @IBOutlet weak var selectPhotoButton: UIButton!
     @IBOutlet weak var goodButton: UIButton!
@@ -24,6 +30,7 @@ class EntryDetailsController: UIViewController {
     @IBOutlet weak var locationView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    
     @IBAction func addLocationPressed() {
         let manager = LocationManager()
         guard
@@ -77,9 +84,10 @@ class EntryDetailsController: UIViewController {
         self.mediaPickerManager.presentImagePickerController(animated: true)
     }
     
-    class func loadFromNib(entry: Entry) -> EntryDetailsController{
+    class func loadFromNib(entry: Entry, indexPath: IndexPath) -> EntryDetailsController{
         let controller = UINib(nibName: EntryDetailsController.nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryDetailsController
         controller.setupWith(entry: entry)
+        controller.indexPath = indexPath
         return controller
     }
     
@@ -120,8 +128,6 @@ class EntryDetailsController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelEntryDetails(sender:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.saveEntryDetails(sender:)))
-
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -131,10 +137,26 @@ class EntryDetailsController: UIViewController {
 
 extension EntryDetailsController {
     func saveEntryDetails(sender: UIBarButtonItem) {
-        
+        guard
+        let delegate = self.delegate,
+        let indexPath = self.indexPath,
+        let text = self.textView.text,
+        let entry = self.entry
+        else {
+            print("SOMETHING WRONG! delegate=\(self.delegate), indexPath=\(self.indexPath), text=\(self.textView.text), entry=\(self.entry)")
+            getBack()
+            return
+        }
+        entry.text = text
+        delegate.entryDetailsController(didFinishModifyEntry: entry, at: indexPath)
+        getBack()
     }
     
     func cancelEntryDetails(sender: UIBarButtonItem) {
+        getBack()
+    }
+    
+    private func getBack() {
         let _ = self.navigationController?.popToRootViewController(animated: true)
     }
 }

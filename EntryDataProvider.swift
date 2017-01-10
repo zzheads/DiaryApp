@@ -33,6 +33,7 @@ class EntryDataProvider {
     
     func perform(request: NSFetchRequest<NSFetchRequestResult>) {
         do {
+            print("Request!")
             let entries = try self.managedObjectContext.fetch(Entry.allEntriesRequest) as! [Entry]
             self.processResult(result: .Success(entries))
         } catch (let error) {
