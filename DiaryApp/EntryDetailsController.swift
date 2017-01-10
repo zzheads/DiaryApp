@@ -13,6 +13,7 @@ class EntryDetailsController: UIViewController {
     static let nibName = "\(EntryDetailsController.self)"
     var entry: Entry? = nil
     
+    @IBOutlet weak var selectPhotoButton: UIButton!
     @IBOutlet weak var goodButton: UIButton!
     @IBOutlet weak var averageButton: UIButton!
     @IBOutlet weak var badButton: UIButton!
@@ -23,7 +24,6 @@ class EntryDetailsController: UIViewController {
     @IBOutlet weak var locationView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
-    
     @IBAction func addLocationPressed() {
         let manager = LocationManager()
         guard
@@ -66,7 +66,16 @@ class EntryDetailsController: UIViewController {
         }
         entry.mood = Mood(title: "Happy")
     }
+
+    lazy var mediaPickerManager: MediaPickerManager = {
+        let manager = MediaPickerManager(presentingViewController: self)
+        manager.delegate = self
+        return manager
+    }()
     
+    @IBAction func selectPhotoPressed() {
+        self.mediaPickerManager.presentImagePickerController(animated: true)
+    }
     
     class func loadFromNib(entry: Entry) -> EntryDetailsController{
         let controller = UINib(nibName: EntryDetailsController.nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryDetailsController
@@ -100,6 +109,8 @@ class EntryDetailsController: UIViewController {
         self.photoImage.makeCircle()
         self.locationLabel.isHidden = true
         self.locationButton.isHidden = false
+        self.selectPhotoButton.backgroundColor = .clear
+        self.selectPhotoButton.setTitleColor(.clear, for: .normal)
     }
     
     override func viewDidLoad() {
@@ -125,5 +136,16 @@ extension EntryDetailsController {
     
     func cancelEntryDetails(sender: UIBarButtonItem) {
         let _ = self.navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension EntryDetailsController: MediaPickerManagerDelegate {
+    func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
+        if let entry = self.entry {
+            entry.photo = Photo(image: image)
+        }
+        self.mediaPickerManager.dismissImagePickerController(animated: true) {
+            self.photoImage.image = image
+        }
     }
 }

@@ -38,6 +38,8 @@
 		A68317E41E23C8470097F588 /* CLPlacemark+description.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68317E31E23C8470097F588 /* CLPlacemark+description.swift */; };
 		A6D0DC381E25040D00033B82 /* EntryDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */; };
 		A6D0DC3A1E2504A900033B82 /* EntryDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC391E2504A900033B82 /* EntryDetailsController.swift */; };
+		A6D0DC3C1E2519D300033B82 /* MediaPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */; };
+		A6D0DC401E251A5500033B82 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		A68317E31E23C8470097F588 /* CLPlacemark+description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLPlacemark+description.swift"; sourceTree = "<group>"; };
 		A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryDetailsController.xib; sourceTree = "<group>"; };
 		A6D0DC391E2504A900033B82 /* EntryDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailsController.swift; sourceTree = "<group>"; };
+		A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPickerManager.swift; sourceTree = "<group>"; };
+		A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 				A651F4D71E20F1A80002FE4A /* QueryType.swift */,
 				A651F4DA1E20F31D0002FE4A /* Result.swift */,
 				A68317DF1E239BF10097F588 /* LocationManager.swift */,
+				A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -172,6 +177,7 @@
 				A68317B81E22673E0097F588 /* EntryCell.swift */,
 				A68317C01E2297A20097F588 /* EntryCell.xib */,
 				A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */,
+				A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */,
 			);
 			name = Design;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				A651F5261E21565C0002FE4A /* EntryDataSource.swift in Sources */,
 				A651F52A1E21565C0002FE4A /* ViewController.swift in Sources */,
 				A651F5211E21565C0002FE4A /* EntryError.swift in Sources */,
+				A6D0DC3C1E2519D300033B82 /* MediaPickerManager.swift in Sources */,
 				A68317E41E23C8470097F588 /* CLPlacemark+description.swift in Sources */,
 				A651F4811E1FCE8E0002FE4A /* AppDelegate.swift in Sources */,
 				A651F4A91E1FD3900002FE4A /* DiaryApp.xcdatamodeld in Sources */,
@@ -349,6 +356,7 @@
 				A68317CF1E2374450097F588 /* UIImageView+Circle.swift in Sources */,
 				A68317B91E22673E0097F588 /* EntryCell.swift in Sources */,
 				A651F5281E21565C0002FE4A /* QueryType.swift in Sources */,
+				A6D0DC401E251A5500033B82 /* PhotoCell.swift in Sources */,
 				A651F5231E21565C0002FE4A /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

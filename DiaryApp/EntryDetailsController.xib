@@ -131,6 +131,21 @@
                         <color key="textColor" red="0.61467653509999998" green="0.60105043650000001" blue="0.62874418499999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3d-1S-CaT">
+                        <rect key="frame" x="16" y="36" width="60" height="60"/>
+                        <color key="backgroundColor" red="0.80886739490000004" green="0.77278232570000005" blue="0.88971918819999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="3Oj-tC-nC0"/>
+                            <constraint firstAttribute="width" constant="60" id="h6s-pv-l58"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="10"/>
+                        <state key="normal" title="Select photo">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="selectPhotoPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="S4u-hf-O8R"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -143,6 +158,7 @@
                     <constraint firstAttribute="trailing" secondItem="2tf-8w-JZw" secondAttribute="trailing" constant="16" id="CSR-ox-575"/>
                     <constraint firstItem="ewL-KU-9Hu" firstAttribute="top" secondItem="9gs-PR-k0l" secondAttribute="bottom" constant="16" id="E8T-3U-6Tp"/>
                     <constraint firstItem="QvB-m8-MEU" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="16" id="Ejc-8b-Im2"/>
+                    <constraint firstItem="p3d-1S-CaT" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="16" id="J2o-6m-Krj"/>
                     <constraint firstItem="A8o-Em-o9M" firstAttribute="top" secondItem="u5R-Pm-zoF" secondAttribute="bottom" constant="16" id="JkI-ke-NZv"/>
                     <constraint firstItem="A8o-Em-o9M" firstAttribute="leading" secondItem="JhV-GX-Bbi" secondAttribute="trailing" id="LVB-hk-TUV"/>
                     <constraint firstItem="JhV-GX-Bbi" firstAttribute="top" secondItem="Mah-Vu-48v" secondAttribute="bottom" constant="16" id="Qs5-NO-PVp"/>
@@ -153,6 +169,7 @@
                     <constraint firstItem="Mah-Vu-48v" firstAttribute="top" secondItem="ewL-KU-9Hu" secondAttribute="bottom" constant="16" id="ePN-IU-Sal"/>
                     <constraint firstItem="QvB-m8-MEU" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="hrF-ff-rR9"/>
                     <constraint firstItem="JhV-GX-Bbi" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="kpd-YR-6ms"/>
+                    <constraint firstItem="p3d-1S-CaT" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="mVo-zY-xV0"/>
                     <constraint firstItem="B6l-FE-nQd" firstAttribute="top" secondItem="2tf-8w-JZw" secondAttribute="bottom" constant="17" id="q1y-Tv-Z3i"/>
                     <constraint firstAttribute="trailing" secondItem="ewL-KU-9Hu" secondAttribute="trailing" constant="16" id="tJ4-0J-KdD"/>
                     <constraint firstItem="u5R-Pm-zoF" firstAttribute="leading" secondItem="Mah-Vu-48v" secondAttribute="trailing" constant="16" id="vOm-YE-doX"/>
@@ -171,6 +188,7 @@
                 <outlet property="locationView" destination="Mah-Vu-48v" id="jPE-Cy-u9e"/>
                 <outlet property="moodBadgeView" destination="Bx9-cp-htD" id="U6N-z4-mE0"/>
                 <outlet property="photoImage" destination="QvB-m8-MEU" id="dxC-j7-2fK"/>
+                <outlet property="selectPhotoButton" destination="p3d-1S-CaT" id="Z2f-TC-u5h"/>
                 <outlet property="textView" destination="ewL-KU-9Hu" id="97x-f4-Owe"/>
                 <outlet property="titleLabel" destination="9gs-PR-k0l" id="MIF-7e-qqv"/>
             </connections>
