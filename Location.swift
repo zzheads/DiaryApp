@@ -15,12 +15,14 @@ class Location: NSManagedObject {
     static let entityName = "\(Location.self)"
     private let manager = LocationManager()
     
-    convenience init?(latitude: Double, longitude: Double, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
+    init(context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Location", in: context)!
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    convenience init(latitude: Double, longitude: Double, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
         let context = CoreDataController.sharedInstance.managedObjectContext
-        guard let entity = NSEntityDescription.entity(forEntityName: Location.entityName, in: context) else {
-            return nil
-        }
-        self.init(entity: entity, insertInto: context)
+        self.init(context: context)
         self.latitude = latitude
         self.longitude = longitude
 
@@ -38,7 +40,7 @@ class Location: NSManagedObject {
         }
     }
     
-    convenience init?(clLocation: CLLocation, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
+    convenience init(clLocation: CLLocation, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
         self.init(latitude: clLocation.coordinate.latitude, longitude: clLocation.coordinate.longitude, completion: completion)
     }
     

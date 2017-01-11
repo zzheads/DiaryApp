@@ -14,15 +14,19 @@ import UIKit
 class Photo: NSManagedObject {
     static let entityName = "\(Photo.self)"
     
+    init(context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Photo", in: context)!
+        super.init(entity: entity, insertInto: context)
+    }
+    
     convenience init?(image: UIImage) {
         let context = CoreDataController.sharedInstance.managedObjectContext
         guard
-        let entity = NSEntityDescription.entity(forEntityName: Photo.entityName, in: context),
         let data = UIImageJPEGRepresentation(image, 1.0)
         else {
             return nil
         }
-        self.init(entity: entity, insertInto: context)
+        self.init(context: context)
         self.data = data
     }
     

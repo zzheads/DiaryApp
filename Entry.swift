@@ -14,14 +14,14 @@ import UIKit
 class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
     
-    static let emptyInstance = Entry.entry(withTitle: "", text: "Record your thoughts for today", photo: nil, location: nil, mood: nil)
+    init(context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
+        super.init(entity: entity, insertInto: context)
+    }
     
-    convenience init?(title: String, text: String, date: Date?, photo: Photo?, location: Location?, mood: Mood?) {
+    convenience init(title: String, text: String, date: Date?, photo: Photo?, location: Location?, mood: Mood) {
         let context = CoreDataController.sharedInstance.managedObjectContext
-        guard let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context) else {
-            return nil
-        }
-        self.init(entity: entity, insertInto: context)
+        self.init(context: context)
         self.title = title
         self.text = text
         if let date = date {
@@ -34,7 +34,7 @@ class Entry: NSManagedObject {
         self.mood = mood
     }
     
-    class func entry(withTitle title: String, text: String, photo: Photo?, location: Location?, mood: Mood?) -> Entry {
+    class func entry(withTitle title: String, text: String, photo: Photo?, location: Location?, mood: Mood) -> Entry {
         let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataController.sharedInstance.managedObjectContext) as! Entry
         entry.title = title
         entry.text = text
@@ -72,7 +72,15 @@ extension Entry {
     @NSManaged var date: Date
     @NSManaged var photo: Photo?
     @NSManaged var location: Location?
-    @NSManaged var mood: Mood?
+    @NSManaged private var moodValue: String
+    public var mood: Mood {
+        get {
+            return Mood(rawValue: self.moodValue)
+        }
+        set {
+            self.moodValue = newValue.rawValue
+        }
+    }
 }
 
 extension Entry {

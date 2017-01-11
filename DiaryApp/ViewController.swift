@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let photo = Photo(image: #imageLiteral(resourceName: "photo"))
-        let mood = Mood(title: "Happy")
+        let mood = Mood.Happy
         let loc2 = Location(clLocation: LocationManager().location!) { (placemarks, error) in
             self.tableView.reloadData()
         }
@@ -138,7 +138,8 @@ extension ViewController {
     }
     
     func addRecord(sender: UIBarButtonItem) {
-        let updates = DataProviderUpdate<Entry>.Insert(Entry.emptyInstance)
+        let emptyEntry = Entry(title: "", text: "Record your thoughts for today", date: Date(), photo: nil, location: nil, mood: .Unknown)
+        let updates = DataProviderUpdate<Entry>.Insert(emptyEntry)
         self.dataSource.processUpdates(updates: [updates])
     }
 }

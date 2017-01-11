@@ -53,25 +53,25 @@ class EntryDetailsController: UIViewController {
         }
     }
     @IBAction func badMoodPressed() {
-        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_bad")
         guard let entry = self.entry else {
             return
         }
-        entry.mood = Mood(title: "Bad")
+        entry.mood = .Bad
+        self.moodBadgeView.image = Mood.Bad.badgeImage
     }
     @IBAction func averageMoodPressed() {
-        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_average")
         guard let entry = self.entry else {
             return
         }
-        entry.mood = Mood(title: "Average")
+        entry.mood = .Average
+        self.moodBadgeView.image = Mood.Average.badgeImage
     }
     @IBAction func goodMoodPressed() {
-        self.moodBadgeView.image = #imageLiteral(resourceName: "icn_happy")
         guard let entry = self.entry else {
             return
         }
-        entry.mood = Mood(title: "Happy")
+        entry.mood = .Happy
+        self.moodBadgeView.image = Mood.Happy.badgeImage
     }
 
     lazy var mediaPickerManager: MediaPickerManager = {
@@ -98,11 +98,7 @@ class EntryDetailsController: UIViewController {
         } else {
             self.photoImage.image = #imageLiteral(resourceName: "icn_picture")
         }
-        if let mood = entry.mood {
-            self.moodBadgeView.image = mood.badgeImage
-        } else {
-            self.moodBadgeView.image = #imageLiteral(resourceName: "icn_noimage")
-        }
+        self.moodBadgeView.image = entry.mood.badgeImage
         if let location = entry.location {
             self.locationButton.setTitle(location.placemark, for: .normal)
         } else {

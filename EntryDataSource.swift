@@ -70,9 +70,7 @@ extension EntryDataSource: UITableViewDataSource {
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .insert:
-            guard let newEntry = Entry(title: "", text: "", date: Date(), photo: nil, location: nil, mood: nil) else {
-                return
-            }
+            let newEntry = Entry(title: "", text: "", date: Date(), photo: nil, location: nil, mood: .Unknown)
             let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)

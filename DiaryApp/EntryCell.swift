@@ -46,11 +46,7 @@ class EntryCell: UITableViewCell {
         } else {
             self.photoImageView.image = #imageLiteral(resourceName: "icn_picture")
         }
-        if let mood = entry.mood {
-            self.moodBadgeImageView.image = mood.badgeImage
-        } else {
-            self.moodBadgeImageView.image = #imageLiteral(resourceName: "icn_noimage")
-        }
+        self.moodBadgeImageView.image = entry.mood.badgeImage
         
         if let location = entry.location {
             self.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")
