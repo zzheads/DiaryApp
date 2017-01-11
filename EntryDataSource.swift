@@ -86,6 +86,8 @@ extension EntryDataSource: DataProviderDelegate {
     }
     
     func processUpdates(updates: [DataProviderUpdate<EntryType>]) {
+        var focusIndexPath = IndexPath(row: 0, section: 0)
+        
         self.tableView.beginUpdates()
         
         for (index, update) in updates.enumerated() {
@@ -94,19 +96,26 @@ extension EntryDataSource: DataProviderDelegate {
                 self.results.insert(entry, at: index)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
+                focusIndexPath = indexPath
+                
             case .Remove(let indexPath):
                 let objectForDelete = self.results[indexPath.row]
                 self.results.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 CoreDataController.sharedInstance.managedObjectContext.delete(objectForDelete as! NSManagedObject)
+                focusIndexPath = indexPath
+                
             case .Change(let entry, let indexPath):
                 self.results[indexPath.row] = entry
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                focusIndexPath = indexPath
             }
         }
 
         self.tableView.endUpdates()
-        
+
+        self.tableView.selectRow(at: focusIndexPath, animated: true, scrollPosition: .middle)
+
         CoreDataController.sharedInstance.saveContext()
         print("Context saved, registered objects: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
     }

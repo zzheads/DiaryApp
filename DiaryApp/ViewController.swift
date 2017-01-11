@@ -96,7 +96,7 @@ extension ViewController: UITableViewDelegate {
             return .delete
         }
         return .none
-    }    
+    }
 }
 
 extension ViewController {

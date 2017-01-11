@@ -23,6 +23,7 @@ class EntryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.photoImageView.makeCircle()
+        self.selectionStyle = .none
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
