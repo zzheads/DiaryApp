@@ -12,13 +12,13 @@ import UIKit
 import CoreData
 
 protocol EntryDetailsControllerDelegate: class {
-    func entryDetailsController(didFinishModifyEntry entryWrapper: EntryWrapper, at indexPath: IndexPath)
+    func entryDetailsController(didFinishModifyEntry entry: Entry, at indexPath: IndexPath)
 }
 
 class EntryDetailsController: UIViewController {
     static let nibName = "\(EntryDetailsController.self)"
 
-    var entryWrapper = EntryWrapper()
+    var entry = Entry()
     
     var indexPath: IndexPath? = nil
     var delegate: EntryDetailsControllerDelegate?
@@ -49,15 +49,14 @@ class EntryDetailsController: UIViewController {
         self.mediaPickerManager.presentImagePickerController(animated: true)
     }
     
-    class func loadFromNib(entry: EntryType, indexPath: IndexPath) -> EntryDetailsController{
+    class func loadFromNib(entry: Entry, indexPath: IndexPath) -> EntryDetailsController{
         let controller = UINib(nibName: EntryDetailsController.nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! EntryDetailsController
         controller.setupWith(entry: entry)
         controller.indexPath = indexPath
         return controller
     }
     
-    func setupWith(entry: EntryType) {
-        self.entryWrapper.setupWith(entry: entry)
+    func setupWith(entry: Entry) {
         
         self.photoImage.image = entry.photo
         self.moodBadgeView.image = entry.mood.badgeImage
@@ -110,12 +109,12 @@ extension EntryDetailsController {
         let indexPath = self.indexPath,
         let text = self.textView.text
         else {
-            print("SOMETHING WRONG! delegate=\(self.delegate), indexPath=\(self.indexPath), text=\(self.textView.text), entryWrapper=\(self.entryWrapper)")
+            print("SOMETHING WRONG! delegate=\(self.delegate), indexPath=\(self.indexPath), text=\(self.textView.text), entryWrapper=\(self.entry)")
             getBack()
             return
         }
-        self.entryWrapper.text = text
-        delegate.entryDetailsController(didFinishModifyEntry: self.entryWrapper, at: indexPath)
+        self.entry.text = text
+        delegate.entryDetailsController(didFinishModifyEntry: self.entry, at: indexPath)
         getBack()
     }
     
@@ -131,7 +130,7 @@ extension EntryDetailsController {
 
 extension EntryDetailsController: MediaPickerManagerDelegate {
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
-        self.entryWrapper.photo = image
+        self.entry.photo = image
         self.mediaPickerManager.dismissImagePickerController(animated: true) {
             self.photoImage.image = image
         }
@@ -158,7 +157,7 @@ extension EntryDetailsController {
             else {
                 return
         }
-        self.entryWrapper.date = newDate
+        self.entry.date = newDate
         self.titleLabel.text = newDate.formattedString
     }
     
@@ -176,8 +175,8 @@ extension EntryDetailsController {
             print("Authorization answered?")
         }
         
-        self.entryWrapper.location = location
-        self.entryWrapper.setPlacemark { (placemark, error) in
+        self.entry.location = location
+        self.entry.setPlacemark { (placemark, error) in
             DispatchQueue.main.async {
                 guard
                     let placemark = placemark
@@ -196,7 +195,7 @@ extension EntryDetailsController {
             return
         }
         let mood = Mood(rawValue: titleButton)
-        self.entryWrapper.mood = mood
+        self.entry.mood = mood
         self.moodBadgeView.image = mood.badgeImage
     }
 }

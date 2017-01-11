@@ -30,7 +30,7 @@ class EntryCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupWith(entry: EntryType) {
+    func setupWith(entry: Entry) {
         self.entryTitleLabel.text = entry.date.formattedString
         
         if (!entry.text.isEmpty) {

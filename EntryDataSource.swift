@@ -14,7 +14,7 @@ class EntryDataSource: NSObject {
     let tableView: UITableView
 
     var count: Int
-    var results: [EntryType] {
+    var results: [Entry] {
         // For debug purposes only, same with self.count variable, after debug - remove it and observers
         willSet {
             self.count = self.results.count
@@ -40,7 +40,7 @@ class EntryDataSource: NSObject {
         self.tableView.dataSource = self
     }
     
-    func objectAt(indexPath: IndexPath) -> EntryType {
+    func objectAt(indexPath: IndexPath) -> Entry {
         return self.results[indexPath.row]
     }
 }
@@ -66,12 +66,12 @@ extension EntryDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            let updates = [DataProviderUpdate<EntryType>.Remove(indexPath)]
+            let updates = [DataProviderUpdate<Entry>.Remove(indexPath)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .insert:
             let newEntry = Entry(text: "")
-            let updates = [DataProviderUpdate<EntryType>.Insert(newEntry)]
+            let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .none:
@@ -85,7 +85,7 @@ extension EntryDataSource: DataProviderDelegate {
         print("Provider failed with error: \(error)")
     }
     
-    func processUpdates(updates: [DataProviderUpdate<EntryType>]) {
+    func processUpdates(updates: [DataProviderUpdate<Entry>]) {
         var focusIndexPath = IndexPath(row: 0, section: 0)
         
         self.tableView.beginUpdates()
@@ -99,10 +99,8 @@ extension EntryDataSource: DataProviderDelegate {
                 focusIndexPath = indexPath
                 
             case .Remove(let indexPath):
-                let objectForDelete = self.results[indexPath.row]
                 self.results.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                CoreDataController.sharedInstance.managedObjectContext.delete(objectForDelete as! NSManagedObject)
                 focusIndexPath = indexPath
                 
             case .Change(let entry, let indexPath):
@@ -115,8 +113,6 @@ extension EntryDataSource: DataProviderDelegate {
         self.tableView.endUpdates()
 
         self.tableView.selectRow(at: focusIndexPath, animated: true, scrollPosition: .middle)
-
-        CoreDataController.sharedInstance.saveContext()
         print("Context saved, registered objects: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
     }
 }

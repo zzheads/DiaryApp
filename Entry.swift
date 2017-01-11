@@ -12,7 +12,7 @@ import CoreLocation
 import UIKit
 
 @objc(Entry)
-class Entry: NSManagedObject, EntryType {
+class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
     static let emptyTextPlaceholder = "Record your thoughts for today"
     

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 protocol DataProviderDelegate: class {
-    func processUpdates(updates: [DataProviderUpdate<EntryType>])
+    func processUpdates(updates: [DataProviderUpdate<Entry>])
     func providerFailedWithError(error: Error)
 }
 
@@ -23,7 +23,7 @@ enum DataProviderUpdate<T> {
 class EntryDataProvider {
     let managedObjectContext = CoreDataController.sharedInstance.managedObjectContext
     let coordinator = CoreDataController.sharedInstance.persistentStoreCoordinator
-    var updates = [DataProviderUpdate<EntryType>]()
+    var updates = [DataProviderUpdate<Entry>]()
     
     private weak var delegate: DataProviderDelegate?
     
