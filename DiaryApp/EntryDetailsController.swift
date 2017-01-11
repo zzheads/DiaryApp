@@ -56,13 +56,15 @@ class EntryDetailsController: UIViewController {
         self.entry = entry
         self.photoImage.image = entry.photo
         self.moodBadgeView.image = entry.mood.badgeImage
-        if (entry.location != nil) {
-            self.locationButton.setTitle(entry.placemark, for: .normal)
-        } else {
-            self.locationButton.setTitle("Add location", for: .normal)
-        }
         self.titleLabel.text = entry.date.formattedString
         self.textView.text = entry.text
+        
+        guard let placemark = entry.placemark else {
+            return
+        }
+        self.locationButton.isHidden = true
+        self.locationLabel.isHidden = false
+        self.locationLabel.text = placemark
     }
     
     override func awakeFromNib() {

@@ -19,6 +19,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EntryDetailsController.setupWith(entry : Entry) -&gt; ():EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.placemark">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryDetailsController.(addLocationPressed() -&gt; ()).(closure #1):EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
