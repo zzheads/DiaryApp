@@ -14,7 +14,7 @@ class EntryDataSource: NSObject {
     let tableView: UITableView
 
     var count: Int
-    var results: [Entry] {
+    var results: [EntryType] {
         // For debug purposes only, same with self.count variable, after debug - remove it and observers
         willSet {
             self.count = self.results.count
@@ -40,7 +40,7 @@ class EntryDataSource: NSObject {
         self.tableView.dataSource = self
     }
     
-    func objectAt(indexPath: IndexPath) -> Entry {
+    func objectAt(indexPath: IndexPath) -> EntryType {
         return self.results[indexPath.row]
     }
 }
@@ -66,12 +66,12 @@ extension EntryDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            let updates = [DataProviderUpdate<Entry>.Remove(indexPath)]
+            let updates = [DataProviderUpdate<EntryType>.Remove(indexPath)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .insert:
             let newEntry = Entry(text: "")
-            let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
+            let updates = [DataProviderUpdate<EntryType>.Insert(newEntry)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .none:
@@ -85,7 +85,7 @@ extension EntryDataSource: DataProviderDelegate {
         print("Provider failed with error: \(error)")
     }
     
-    func processUpdates(updates: [DataProviderUpdate<Entry>]) {
+    func processUpdates(updates: [DataProviderUpdate<EntryType>]) {
         self.tableView.beginUpdates()
         
         for (index, update) in updates.enumerated() {
@@ -98,7 +98,7 @@ extension EntryDataSource: DataProviderDelegate {
                 let objectForDelete = self.results[indexPath.row]
                 self.results.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                CoreDataController.sharedInstance.managedObjectContext.delete(objectForDelete)
+                CoreDataController.sharedInstance.managedObjectContext.delete(objectForDelete as! NSManagedObject)
             case .Change(let entry, let indexPath):
                 self.results[indexPath.row] = entry
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)

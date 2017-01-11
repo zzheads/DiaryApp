@@ -12,12 +12,24 @@ import CoreLocation
 import UIKit
 
 @objc(Entry)
-class Entry: NSManagedObject {
+class Entry: NSManagedObject, EntryType {
     static let entityName = "\(Entry.self)"
     static let emptyTextPlaceholder = "Record your thoughts for today"
     
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
+    }
+    
+    required convenience init(text: String, date: Date, photo: UIImage?, location: CLLocation?, placemark: String?, mood: Mood) {
+        let context = CoreDataController.sharedInstance.managedObjectContext
+        let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context)!
+        self.init(entity: entity, insertInto: context)
+        self.text = text
+        self.date = date
+        self.photo = photo
+        self.location = location
+        self.placemark = placemark
+        self.mood = mood
     }
     
     convenience init(text: String, date: Date? = nil, photo: UIImage? = nil, location: CLLocation? = nil, mood: Mood = .Unknown) {
@@ -57,7 +69,6 @@ class Entry: NSManagedObject {
 }
 
 extension Entry {
-    @NSManaged var title: String
     @NSManaged var text: String
     @NSManaged var date: Date
     
