@@ -35,57 +35,6 @@ class EntryDetailsController: UIViewController {
     @IBAction func changeDatePressed() {
     }
     
-    @IBAction func addLocationPressed() {
-        let manager = LocationManager.sharedInstance
-        guard
-            let location = manager.location,
-            let entry = self.entry
-            else {
-                print("Something is nil, entry=\(self.entry), location=\(manager.location)")
-                return
-        }
-        if (!manager.isAuthorized) {
-            print("Authorization requested!")
-            manager.requestAuthorization()
-            print("Authorization answered?")
-        }
-        
-        entry.location = location
-        entry.setPlacemark { (placemark, error) in
-            DispatchQueue.main.async {
-                guard
-                    let placemark = placemark
-                    else {
-                        return
-                }
-                self.locationButton.isHidden = true
-                self.locationLabel.text = placemark
-                self.locationLabel.isHidden = false
-            }
-        }
-    }
-    @IBAction func badMoodPressed() {
-        guard let entry = self.entry else {
-            return
-        }
-        entry.mood = .Bad
-        self.moodBadgeView.image = Mood.Bad.badgeImage
-    }
-    @IBAction func averageMoodPressed() {
-        guard let entry = self.entry else {
-            return
-        }
-        entry.mood = .Average
-        self.moodBadgeView.image = Mood.Average.badgeImage
-    }
-    @IBAction func goodMoodPressed() {
-        guard let entry = self.entry else {
-            return
-        }
-        entry.mood = .Happy
-        self.moodBadgeView.image = Mood.Happy.badgeImage
-    }
-
     lazy var mediaPickerManager: MediaPickerManager = {
         let manager = MediaPickerManager(presentingViewController: self)
         manager.delegate = self
@@ -128,6 +77,9 @@ class EntryDetailsController: UIViewController {
         self.changeDateButton.addTarget(self, action: #selector(self.startEditDate), for: .touchUpInside)
         self.newDateTextField.addTarget(self, action: #selector(self.endEditDate), for: UIControlEvents.editingDidEnd)
         endEditDate()
+        self.badButton.addTarget(self, action: #selector(self.moodPressed(sender:)), for: .touchUpInside)
+        self.averageButton.addTarget(self, action: #selector(self.moodPressed(sender:)), for: .touchUpInside)
+        self.goodButton.addTarget(self, action: #selector(self.moodPressed(sender:)), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -203,5 +155,47 @@ extension EntryDetailsController {
         }
         entry.date = newDate
         self.titleLabel.text = entry.date.formattedString
+    }
+    
+    @IBAction func addLocationPressed() {
+        let manager = LocationManager.sharedInstance
+        guard
+            let location = manager.location,
+            let entry = self.entry
+            else {
+                print("Something is nil, entry=\(self.entry), location=\(manager.location)")
+                return
+        }
+        if (!manager.isAuthorized) {
+            print("Authorization requested!")
+            manager.requestAuthorization()
+            print("Authorization answered?")
+        }
+        
+        entry.location = location
+        entry.setPlacemark { (placemark, error) in
+            DispatchQueue.main.async {
+                guard
+                    let placemark = placemark
+                    else {
+                        return
+                }
+                self.locationButton.isHidden = true
+                self.locationLabel.text = placemark
+                self.locationLabel.isHidden = false
+            }
+        }
+    }
+
+    func moodPressed(sender: UIButton) {
+        guard
+            let titleButton = sender.title(for: .normal),
+            let entry = self.entry
+            else {
+            return
+        }
+        let mood = Mood(rawValue: titleButton)
+        entry.mood = mood
+        self.moodBadgeView.image = mood.badgeImage
     }
 }

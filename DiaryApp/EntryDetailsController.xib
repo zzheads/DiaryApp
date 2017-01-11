@@ -61,9 +61,6 @@
                         <state key="normal" title="Bad">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
-                        <connections>
-                            <action selector="badMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="gSt-Bx-oSl"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-FE-nQd">
                         <rect key="frame" x="249" y="318.5" width="110" height="30"/>
@@ -73,12 +70,9 @@
                             <constraint firstAttribute="height" constant="30" id="QIx-Sb-Un6"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                        <state key="normal" title="Good">
+                        <state key="normal" title="Happy">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
-                        <connections>
-                            <action selector="goodMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="ewl-df-AAf"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8o-Em-o9M">
                         <rect key="frame" x="126" y="318.5" width="123" height="30"/>
@@ -90,9 +84,6 @@
                         <state key="normal" title="Average">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
-                        <connections>
-                            <action selector="averageMoodPressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="ABR-ed-e3g"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-Pm-zoF">
                         <rect key="frame" x="124" y="275" width="103" height="30"/>
