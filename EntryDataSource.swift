@@ -95,19 +95,19 @@ extension EntryDataSource: DataProviderDelegate {
                 let indexPath = IndexPath(row: index, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
             case .Remove(let indexPath):
+                let objectForDelete = self.results[indexPath.row]
                 self.results.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                CoreDataController.sharedInstance.managedObjectContext.delete(objectForDelete)
             case .Change(let entry, let indexPath):
                 self.results[indexPath.row] = entry
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
 
-        do {
-            try CoreDataController.sharedInstance.managedObjectContext.save()
-        } catch (let error) {
-            print("\(error)")
-        }
         self.tableView.endUpdates()
+        
+        CoreDataController.sharedInstance.saveContext()
+        print("Context saved, registered objects: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
     }
 }

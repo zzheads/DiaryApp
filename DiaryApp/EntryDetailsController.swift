@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import CoreLocation
 import UIKit
+import CoreData
 
 protocol EntryDetailsControllerDelegate: class {
     func entryDetailsController(didFinishModifyEntry entry: Entry, at indexPath: IndexPath)
@@ -15,7 +17,8 @@ protocol EntryDetailsControllerDelegate: class {
 
 class EntryDetailsController: UIViewController {
     static let nibName = "\(EntryDetailsController.self)"
-    var entry: Entry? = nil
+    
+    var entry: Entry = Entry(entity: NSEntityDescription.entity(forEntityName: Entry.entityName, in: CoreDataController.sharedInstance.managedObjectContext)!, insertInto: CoreDataController.sharedInstance.managedObjectContext)
     var indexPath: IndexPath? = nil
     var delegate: EntryDetailsControllerDelegate?
     
@@ -103,19 +106,19 @@ extension EntryDetailsController {
         guard
         let delegate = self.delegate,
         let indexPath = self.indexPath,
-        let text = self.textView.text,
-        let entry = self.entry
+        let text = self.textView.text
         else {
             print("SOMETHING WRONG! delegate=\(self.delegate), indexPath=\(self.indexPath), text=\(self.textView.text), entry=\(self.entry)")
             getBack()
             return
         }
-        entry.text = text
-        delegate.entryDetailsController(didFinishModifyEntry: entry, at: indexPath)
+        self.entry.text = text
+        delegate.entryDetailsController(didFinishModifyEntry: self.entry, at: indexPath)
         getBack()
     }
     
     func cancelEntryDetails(sender: UIBarButtonItem) {
+        CoreDataController.sharedInstance.managedObjectContext.undo()
         getBack()
     }
     
@@ -126,9 +129,7 @@ extension EntryDetailsController {
 
 extension EntryDetailsController: MediaPickerManagerDelegate {
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
-        if let entry = self.entry {
-            entry.photo = image
-        }
+        entry.photo = image
         self.mediaPickerManager.dismissImagePickerController(animated: true) {
             self.photoImage.image = image
         }
@@ -151,22 +152,20 @@ extension EntryDetailsController {
         self.changeDateButton.isHidden = false
         self.titleLabel.isHidden = false
         guard
-        let entry = self.entry,
         let newDate = self.newDateTextField.text?.formattedDate
             else {
                 return
         }
-        entry.date = newDate
+        self.entry.date = newDate
         self.titleLabel.text = entry.date.formattedString
     }
     
     @IBAction func addLocationPressed() {
         let manager = LocationManager.sharedInstance
         guard
-            let location = manager.location,
-            let entry = self.entry
+            let location = manager.location
             else {
-                print("Something is nil, entry=\(self.entry), location=\(manager.location)")
+                print("Location=\(manager.location), location services enabled=\(CLLocationManager.locationServicesEnabled())")
                 return
         }
         if (!manager.isAuthorized) {
@@ -175,8 +174,8 @@ extension EntryDetailsController {
             print("Authorization answered?")
         }
         
-        entry.location = location
-        entry.setPlacemark { (placemark, error) in
+        self.entry.location = location
+        self.entry.setPlacemark { (placemark, error) in
             DispatchQueue.main.async {
                 guard
                     let placemark = placemark
@@ -191,14 +190,11 @@ extension EntryDetailsController {
     }
 
     func moodPressed(sender: UIButton) {
-        guard
-            let titleButton = sender.title(for: .normal),
-            let entry = self.entry
-            else {
+        guard let titleButton = sender.title(for: .normal) else {
             return
         }
         let mood = Mood(rawValue: titleButton)
-        entry.mood = mood
+        self.entry.mood = mood
         self.moodBadgeView.image = mood.badgeImage
     }
 }

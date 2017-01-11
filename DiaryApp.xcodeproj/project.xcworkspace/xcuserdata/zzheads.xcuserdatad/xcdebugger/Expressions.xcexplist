@@ -105,6 +105,9 @@
          contextName = "EntryDetailsController.addLocationPressed() -&gt; ():EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.entry">
+            </PersistentString>
+            <PersistentString
                value = "manager.location">
             </PersistentString>
          </PersistentStrings>
@@ -138,7 +141,7 @@
          contextName = "EntryDataSource.processUpdates(updates : [DataProviderUpdate&lt;Entry&gt;]) -&gt; ():EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
-               value = "entry.placemark">
+               value = "CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

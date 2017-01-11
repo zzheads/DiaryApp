@@ -47,6 +47,7 @@ class EntryCell: UITableViewCell {
             self.entryLocationLabel.text = entry.placemark
         } else {
             self.locationImageView.image = nil
+            self.entryLocationLabel.text = ""
         }
     }
 }
