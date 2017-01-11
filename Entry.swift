@@ -14,6 +14,7 @@ import UIKit
 @objc(Entry)
 class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
+    static let emptyTextPlaceholder = "Record your thoughts for today"
     
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
@@ -94,7 +95,7 @@ extension Entry {
     @NSManaged private var longitude: Double
     public var location: CLLocation? {
         get {
-            if (self.longitude != Double.nan && self.longitude != Double.nan) {
+            if ((!self.longitude.isNaN) && (!self.latitude.isNaN)) {
                 return CLLocation(latitude: self.latitude, longitude: self.longitude)
             }
             return nil

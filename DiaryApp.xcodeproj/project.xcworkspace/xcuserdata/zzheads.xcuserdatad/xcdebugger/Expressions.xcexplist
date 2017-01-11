@@ -60,8 +60,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Entry.location.getter:Entry.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.latitude">
+            </PersistentString>
+            <PersistentString
+               value = "self.longitude">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryCell.setupWith(entry : Entry) -&gt; ():EntryCell.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "entry.location">
+            </PersistentString>
+            <PersistentString
+               value = "entry.latitude">
+            </PersistentString>
             <PersistentString
                value = "entry.photo">
             </PersistentString>

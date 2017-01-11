@@ -121,7 +121,7 @@ extension ViewController {
     }
     
     func addRecord(sender: UIBarButtonItem) {
-        let emptyEntry = Entry(text: "Record your thoughts for today")
+        let emptyEntry = Entry(text: "")
         let updates = DataProviderUpdate<Entry>.Insert(emptyEntry)
         self.dataSource.processUpdates(updates: [updates])
     }

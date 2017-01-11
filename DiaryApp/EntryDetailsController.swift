@@ -141,6 +141,7 @@ extension EntryDetailsController {
         self.newDateTextField.isHidden = false
         self.changeDateButton.isHidden = true
         self.titleLabel.isHidden = true
+        self.newDateTextField.becomeFirstResponder()
     }
     
     @objc fileprivate func endEditDate() {
