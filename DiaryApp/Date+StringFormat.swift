@@ -15,3 +15,11 @@ extension Date {
         return "\(dateFormatter.string(from: self))"
     }
 }
+
+extension String {
+    var formattedDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.date(from: self)
+    }
+}

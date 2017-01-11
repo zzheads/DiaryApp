@@ -30,6 +30,10 @@ class EntryDetailsController: UIViewController {
     @IBOutlet weak var locationView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var changeDateButton: UIButton!
+    @IBOutlet weak var newDateTextField: UITextField!
+    @IBAction func changeDatePressed() {
+    }
     
     @IBAction func addLocationPressed() {
         let manager = LocationManager.sharedInstance
@@ -119,6 +123,11 @@ class EntryDetailsController: UIViewController {
         self.locationButton.isHidden = false
         self.selectPhotoButton.backgroundColor = .clear
         self.selectPhotoButton.setTitleColor(.clear, for: .normal)
+        self.changeDateButton.backgroundColor = .clear
+        self.changeDateButton.setTitleColor(.clear, for: .normal)
+        self.changeDateButton.addTarget(self, action: #selector(self.startEditDate), for: .touchUpInside)
+        self.newDateTextField.addTarget(self, action: #selector(self.endEditDate), for: UIControlEvents.editingDidEnd)
+        endEditDate()
     }
     
     override func viewDidLoad() {
@@ -169,5 +178,30 @@ extension EntryDetailsController: MediaPickerManagerDelegate {
         self.mediaPickerManager.dismissImagePickerController(animated: true) {
             self.photoImage.image = image
         }
+    }
+}
+
+// MARK: Handle events here (buttons pressed etc)
+
+extension EntryDetailsController {
+    @objc fileprivate func startEditDate() {
+        self.newDateTextField.placeholder = "Enter date DD/MM/YYYY"
+        self.newDateTextField.isHidden = false
+        self.changeDateButton.isHidden = true
+        self.titleLabel.isHidden = true
+    }
+    
+    @objc fileprivate func endEditDate() {
+        self.newDateTextField.isHidden = true
+        self.changeDateButton.isHidden = false
+        self.titleLabel.isHidden = false
+        guard
+        let entry = self.entry,
+        let newDate = self.newDateTextField.text?.formattedDate
+            else {
+                return
+        }
+        entry.date = newDate
+        self.titleLabel.text = entry.date.formattedString
     }
 }

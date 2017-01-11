@@ -21,13 +21,13 @@ class EntryDataSource: NSObject {
         }
         didSet {
             if (self.results.count > self.count) {
-                print("Added \(self.results.count - self.count) entries")
+                print("DataSource: Added \(self.results.count - self.count) entries...")
             }
             if (self.results.count < self.count) {
-                print("Removed \(self.count - self.results.count) entries")
+                print("DataSource: Removed \(self.count - self.results.count) entries...")
             }
             if (self.results.count == self.count) {
-                print("Strange, results changed but count is the same")
+                print("DataSource: Looks like it was update...")
             }
         }
     }

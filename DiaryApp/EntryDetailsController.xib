@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="21" id="Asd-CG-au0"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                        <color key="textColor" red="0.1424564123" green="0.43202492590000002" blue="0.52230489250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.23064014315605164" green="0.30146884918212891" blue="0.43252936005592346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_geolocate" translatesAutoresizingMaskIntoConstraints="NO" id="Mah-Vu-48v">
@@ -142,16 +142,36 @@
                         <rect key="frame" x="92" y="70" width="259" height="197"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <color key="textColor" red="0.62083077430725098" green="0.65160483121871948" blue="0.70981842279434204" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter new date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wkV-Gj-6no">
+                        <rect key="frame" x="92" y="32" width="259" height="30"/>
+                        <color key="textColor" red="0.1424564123" green="0.43202492590000002" blue="0.52230489250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHl-gA-ETQ">
+                        <rect key="frame" x="92" y="32" width="259" height="30"/>
+                        <color key="backgroundColor" red="0.80886739490000004" green="0.77278232570000005" blue="0.88971918819999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
+                        <state key="normal" title="Change date!">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="changeDatePressed" destination="lK1-kj-vhb" eventType="touchUpInside" id="WPo-cP-hHH"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="JhV-GX-Bbi" firstAttribute="centerY" secondItem="bBv-0q-oBn" secondAttribute="centerY" id="1ax-Uy-z1f"/>
+                    <constraint firstItem="RrY-wg-WXa" firstAttribute="top" secondItem="wkV-Gj-6no" secondAttribute="bottom" constant="8" id="4cX-Dq-Jhz"/>
                     <constraint firstItem="Bx9-cp-htD" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="50" id="59Z-Ty-tx1"/>
                     <constraint firstItem="A8o-Em-o9M" firstAttribute="centerY" secondItem="bBv-0q-oBn" secondAttribute="centerY" id="5Tr-th-UPo"/>
                     <constraint firstItem="Mah-Vu-48v" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="92" id="61L-fZ-mfS"/>
+                    <constraint firstItem="wkV-Gj-6no" firstAttribute="leading" secondItem="p3d-1S-CaT" secondAttribute="trailing" constant="16" id="AMn-XQ-xcd"/>
                     <constraint firstItem="RrY-wg-WXa" firstAttribute="leading" secondItem="Bx9-cp-htD" secondAttribute="trailing" constant="12" id="CFz-aZ-KXV"/>
                     <constraint firstItem="9gs-PR-k0l" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="16" id="CNo-Po-pjE"/>
                     <constraint firstAttribute="trailing" secondItem="2tf-8w-JZw" secondAttribute="trailing" constant="24" id="CSR-ox-575"/>
@@ -164,12 +184,18 @@
                     <constraint firstItem="B6l-FE-nQd" firstAttribute="leading" secondItem="A8o-Em-o9M" secondAttribute="trailing" id="WDn-8M-8eM"/>
                     <constraint firstAttribute="trailing" secondItem="9gs-PR-k0l" secondAttribute="trailing" constant="16" id="XGO-jj-l2f"/>
                     <constraint firstAttribute="trailing" secondItem="B6l-FE-nQd" secondAttribute="trailing" constant="16" id="aeG-G0-yVR"/>
+                    <constraint firstItem="RrY-wg-WXa" firstAttribute="top" secondItem="RHl-gA-ETQ" secondAttribute="bottom" constant="8" id="c1I-D8-Eol"/>
                     <constraint firstAttribute="trailing" secondItem="u5R-Pm-zoF" secondAttribute="trailing" constant="148" id="cTi-tb-yVU"/>
+                    <constraint firstAttribute="trailing" secondItem="wkV-Gj-6no" secondAttribute="trailing" constant="24" id="dAM-ZQ-FL1"/>
                     <constraint firstItem="QvB-m8-MEU" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="hrF-ff-rR9"/>
+                    <constraint firstItem="RHl-gA-ETQ" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="12" id="izv-cZ-oSO"/>
                     <constraint firstItem="JhV-GX-Bbi" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="kpd-YR-6ms"/>
                     <constraint firstItem="p3d-1S-CaT" firstAttribute="leading" secondItem="bBv-0q-oBn" secondAttribute="leading" constant="16" id="mVo-zY-xV0"/>
                     <constraint firstItem="B6l-FE-nQd" firstAttribute="top" secondItem="2tf-8w-JZw" secondAttribute="bottom" constant="17" id="q1y-Tv-Z3i"/>
                     <constraint firstAttribute="trailing" secondItem="RrY-wg-WXa" secondAttribute="trailing" constant="24" id="qqJ-db-FBW"/>
+                    <constraint firstItem="wkV-Gj-6no" firstAttribute="top" secondItem="vx9-e5-guO" secondAttribute="bottom" constant="12" id="s6b-mF-81a"/>
+                    <constraint firstItem="RHl-gA-ETQ" firstAttribute="leading" secondItem="p3d-1S-CaT" secondAttribute="trailing" constant="16" id="sSC-Jx-Xar"/>
+                    <constraint firstAttribute="trailing" secondItem="RHl-gA-ETQ" secondAttribute="trailing" constant="24" id="shC-eA-Fgr"/>
                     <constraint firstItem="u5R-Pm-zoF" firstAttribute="leading" secondItem="Mah-Vu-48v" secondAttribute="trailing" constant="8" id="vOm-YE-doX"/>
                     <constraint firstItem="u5R-Pm-zoF" firstAttribute="top" secondItem="RrY-wg-WXa" secondAttribute="bottom" constant="8" id="xOO-Kg-JBL"/>
                     <constraint firstItem="2tf-8w-JZw" firstAttribute="leading" secondItem="Mah-Vu-48v" secondAttribute="trailing" constant="8" id="xVn-Bh-2nF"/>
@@ -181,11 +207,13 @@
             <connections>
                 <outlet property="averageButton" destination="A8o-Em-o9M" id="0RY-vc-1c5"/>
                 <outlet property="badButton" destination="JhV-GX-Bbi" id="vHV-58-7qf"/>
+                <outlet property="changeDateButton" destination="RHl-gA-ETQ" id="qaN-v5-EpU"/>
                 <outlet property="goodButton" destination="B6l-FE-nQd" id="CiP-IW-JUl"/>
                 <outlet property="locationButton" destination="u5R-Pm-zoF" id="eVf-18-qCn"/>
                 <outlet property="locationLabel" destination="2tf-8w-JZw" id="8Zz-Ie-Izv"/>
                 <outlet property="locationView" destination="Mah-Vu-48v" id="jPE-Cy-u9e"/>
                 <outlet property="moodBadgeView" destination="Bx9-cp-htD" id="U6N-z4-mE0"/>
+                <outlet property="newDateTextField" destination="wkV-Gj-6no" id="4DX-GE-Bjx"/>
                 <outlet property="photoImage" destination="QvB-m8-MEU" id="dxC-j7-2fK"/>
                 <outlet property="selectPhotoButton" destination="p3d-1S-CaT" id="Z2f-TC-u5h"/>
                 <outlet property="textView" destination="RrY-wg-WXa" id="oXb-30-Kp7"/>
