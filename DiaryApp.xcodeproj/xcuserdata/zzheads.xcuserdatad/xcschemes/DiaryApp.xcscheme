@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A651F4931E1FCE8E0002FE4A"
+               BlueprintIdentifier = "A651F4F71E2153FF0002FE4A"
                BuildableName = "DiaryAppTests.xctest"
                BlueprintName = "DiaryAppTests"
                ReferencedContainer = "container:DiaryApp.xcodeproj">
@@ -71,6 +71,13 @@
             ReferencedContainer = "container:DiaryApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -70,7 +70,7 @@ extension EntryDataSource: UITableViewDataSource {
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .insert:
-            let newEntry = Entry(title: "", text: "", date: Date(), photo: nil, location: nil, mood: .Unknown)
+            let newEntry = Entry(text: "")
             let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
@@ -102,7 +102,12 @@ extension EntryDataSource: DataProviderDelegate {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
-        
+
+        do {
+            try CoreDataController.sharedInstance.managedObjectContext.save()
+        } catch (let error) {
+            print("\(error)")
+        }
         self.tableView.endUpdates()
     }
 }

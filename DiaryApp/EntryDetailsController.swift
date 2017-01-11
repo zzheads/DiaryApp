@@ -32,7 +32,7 @@ class EntryDetailsController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     
     @IBAction func addLocationPressed() {
-        let manager = LocationManager()
+        let manager = LocationManager.sharedInstance
         guard
             let location = manager.location,
             let entry = self.entry
@@ -40,16 +40,24 @@ class EntryDetailsController: UIViewController {
                 print("Something is nil, entry=\(self.entry), location=\(manager.location)")
                 return
         }
-        entry.location = Location(clLocation: location) { (placemarks, error) in
-            guard
-                let placemarks = placemarks,
-                let placemark = placemarks.first
-                else {
-                return
+        if (!manager.isAuthorized) {
+            print("Authorization requested!")
+            manager.requestAuthorization()
+            print("Authorization answered?")
+        }
+        
+        entry.location = location
+        entry.setPlacemark { (placemark, error) in
+            DispatchQueue.main.async {
+                guard
+                    let placemark = placemark
+                    else {
+                        return
+                }
+                self.locationButton.isHidden = true
+                self.locationLabel.text = placemark
+                self.locationLabel.isHidden = false
             }
-            self.locationButton.isHidden = true
-            self.locationLabel.text = placemark.myDescription
-            self.locationLabel.isHidden = false
         }
     }
     @IBAction func badMoodPressed() {
@@ -93,14 +101,10 @@ class EntryDetailsController: UIViewController {
     
     func setupWith(entry: Entry) {
         self.entry = entry
-        if let photo = entry.photo {
-            self.photoImage.image = photo.image
-        } else {
-            self.photoImage.image = #imageLiteral(resourceName: "icn_picture")
-        }
+        self.photoImage.image = entry.photo
         self.moodBadgeView.image = entry.mood.badgeImage
-        if let location = entry.location {
-            self.locationButton.setTitle(location.placemark, for: .normal)
+        if (entry.location != nil) {
+            self.locationButton.setTitle(entry.placemark, for: .normal)
         } else {
             self.locationButton.setTitle("Add location", for: .normal)
         }
@@ -160,7 +164,7 @@ extension EntryDetailsController {
 extension EntryDetailsController: MediaPickerManagerDelegate {
     func mediaPickerManager(manager: MediaPickerManager, didFinishPickingImage image: UIImage) {
         if let entry = self.entry {
-            entry.photo = Photo(image: image)
+            entry.photo = image
         }
         self.mediaPickerManager.dismissImagePickerController(animated: true) {
             self.photoImage.image = image

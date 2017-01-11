@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 class ViewController: UIViewController {
     
@@ -51,14 +52,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let photo = Photo(image: #imageLiteral(resourceName: "photo"))
         let mood = Mood.Happy
-        let loc2 = Location(clLocation: LocationManager().location!) { (placemarks, error) in
-            self.tableView.reloadData()
-        }
-        let loc1 = Location(latitude: 40.787, longitude: -74.01) { (placemarks, error) in
-            self.tableView.reloadData()
-        }
+        let loc2 = LocationManager.sharedInstance.location!
+        let loc1 = CLLocation(latitude: 40.787, longitude: -74.01)
         
         self.tableView.delegate = self
         self.dataProvider.perform(request: Entry.allEntriesRequest)
@@ -138,7 +134,7 @@ extension ViewController {
     }
     
     func addRecord(sender: UIBarButtonItem) {
-        let emptyEntry = Entry(title: "", text: "Record your thoughts for today", date: Date(), photo: nil, location: nil, mood: .Unknown)
+        let emptyEntry = Entry(text: "Record your thoughts for today")
         let updates = DataProviderUpdate<Entry>.Insert(emptyEntry)
         self.dataSource.processUpdates(updates: [updates])
     }

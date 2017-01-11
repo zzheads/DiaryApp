@@ -41,16 +41,12 @@ class EntryCell: UITableViewCell {
 //        print("Class of object - \(mirror), \(entry.debugInfo), \(entry.date)")
         self.entryTitleLabel.text = entry.date.formattedString
         self.entryTextLabel.text = entry.text
-        if let photo = entry.photo {
-            self.photoImageView.image = photo.image
-        } else {
-            self.photoImageView.image = #imageLiteral(resourceName: "icn_picture")
-        }
+        self.photoImageView.image = entry.photo
         self.moodBadgeImageView.image = entry.mood.badgeImage
         
-        if let location = entry.location {
+        if (entry.location != nil) {
             self.locationImageView.image = #imageLiteral(resourceName: "icn_geolocate")
-            self.entryLocationLabel.text = location.placemark
+            self.entryLocationLabel.text = entry.placemark
         }
     }
 }

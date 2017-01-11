@@ -8,21 +8,21 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 import UIKit
 
 @objc(Entry)
 class Entry: NSManagedObject {
     static let entityName = "\(Entry.self)"
     
-    init(context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "Entry", in: context)!
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
     
-    convenience init(title: String, text: String, date: Date?, photo: Photo?, location: Location?, mood: Mood) {
+    convenience init(text: String, date: Date? = nil, photo: UIImage? = nil, location: CLLocation? = nil, mood: Mood = .Unknown) {
         let context = CoreDataController.sharedInstance.managedObjectContext
-        self.init(context: context)
-        self.title = title
+        let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context)!
+        self.init(entity: entity, insertInto: context)
         self.text = text
         if let date = date {
             self.date = date
@@ -32,17 +32,6 @@ class Entry: NSManagedObject {
         self.photo = photo
         self.location = location
         self.mood = mood
-    }
-    
-    class func entry(withTitle title: String, text: String, photo: Photo?, location: Location?, mood: Mood) -> Entry {
-        let entry = NSEntityDescription.insertNewObject(forEntityName: Entry.entityName, into: CoreDataController.sharedInstance.managedObjectContext) as! Entry
-        entry.title = title
-        entry.text = text
-        entry.date = Date()
-        entry.photo = photo
-        entry.location = location
-        entry.mood = mood
-        return entry
     }
     
     public func insert() {
@@ -70,8 +59,7 @@ extension Entry {
     @NSManaged var title: String
     @NSManaged var text: String
     @NSManaged var date: Date
-    @NSManaged var photo: Photo?
-    @NSManaged var location: Location?
+    
     @NSManaged private var moodValue: String
     public var mood: Mood {
         get {
@@ -81,11 +69,71 @@ extension Entry {
             self.moodValue = newValue.rawValue
         }
     }
+    
+    @NSManaged private var photoData: Data?
+    public var photo: UIImage? {
+        get {
+            guard
+                let data = self.photoData,
+                let image = UIImage(data: data)
+                else {
+                return #imageLiteral(resourceName: "icn_picture")
+            }
+            return image
+        }
+        set {
+            guard let newValue = newValue else {
+                self.photoData = nil
+                return
+            }
+            self.photoData = UIImageJPEGRepresentation(newValue, 0.0)
+        }
+    }
+    
+    @NSManaged private var latitude: Double
+    @NSManaged private var longitude: Double
+    public var location: CLLocation? {
+        get {
+            if (self.longitude != Double.nan && self.longitude != Double.nan) {
+                return CLLocation(latitude: self.latitude, longitude: self.longitude)
+            }
+            return nil
+        }
+        set {
+            guard let newValue = newValue else {
+                self.latitude = Double.nan
+                self.longitude = Double.nan
+                return
+            }
+            self.latitude = newValue.coordinate.latitude
+            self.longitude = newValue.coordinate.longitude
+        }
+    }
+    
+    @NSManaged var placemark: String?
+    
+    func setPlacemark(completion: @escaping (String?, Error?) -> Void) {
+        let geocoder = CLGeocoder()
+        guard let location = self.location else {
+            return
+        }
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            guard
+            let placemarks = placemarks,
+            let placemark = placemarks.first
+            else {
+                completion(nil, error)
+                return
+            }
+            self.placemark = placemark.myDescription
+            completion(self.placemark, nil)
+        }
+    }
 }
 
 extension Entry {
     var debugInfo: String {
-        return "Entry: id=\(self.objectID) title=\(self.title) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
+        return "Entry: id=\(self.objectID) text=\(self.text) date=\(self.date) photo=\(self.photo) location=\(self.location) mood=\(self.mood)"
     }
 }
 

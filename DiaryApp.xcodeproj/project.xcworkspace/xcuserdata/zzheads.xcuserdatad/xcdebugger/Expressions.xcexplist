@@ -11,10 +11,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EntryDetailsController.saveEntryDetails(sender : UIBarButtonItem) -&gt; ():EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.placemark">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryDetailsController.(addLocationPressed() -&gt; ()).(closure #1):EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
                value = "placemark.myDescription">
+            </PersistentString>
+            <PersistentString
+               value = "entry.placemark">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,21 +66,15 @@
                value = "entry.photo">
             </PersistentString>
             <PersistentString
-               value = "entry.date">
+               value = "entry.mood">
             </PersistentString>
             <PersistentString
-               value = "entry.mood">
+               value = "entry.date">
             </PersistentString>
             <PersistentString
                value = "entry.text">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.calculateHeightForCell(cell : EntryCell) -&gt; CGFloat:ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "Entry.photoWithMood.getter:Entry.swift">
       </ContextState>
       <ContextState
          contextName = "EntryDetailsController.addLocationPressed() -&gt; ():EntryDetailsController.swift">
@@ -78,6 +83,12 @@
                value = "manager.location">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Entry.photoWithMood.getter:Entry.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calculateHeightForCell(cell : EntryCell) -&gt; CGFloat:ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "EntryDataSource.init(tableView : UITableView, results : [Entry]) -&gt; EntryDataSource:EntryDataSource.swift">
@@ -91,10 +102,10 @@
          contextName = "EntryDetailsController.init(entry : Entry) -&gt; EntryDetailsController:EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "entry.date.formattedString">
+               value = "entry.date">
             </PersistentString>
             <PersistentString
-               value = "entry.date">
+               value = "entry.date.formattedString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -102,7 +113,7 @@
          contextName = "EntryDataSource.processUpdates(updates : [DataProviderUpdate&lt;Entry&gt;]) -&gt; ():EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.results[index].title">
+               value = "entry.placemark">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -118,10 +129,10 @@
          contextName = "LocationManager.location.getter:LocationManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.manager.location">
+               value = "self.manager">
             </PersistentString>
             <PersistentString
-               value = "self.manager">
+               value = "self.manager.location">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

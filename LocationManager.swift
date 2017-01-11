@@ -10,22 +10,28 @@ import Foundation
 import CoreLocation
 
 class LocationManager {
+    static let sharedInstance = LocationManager()
     private let manager = CLLocationManager()
     private let geocoder = CLGeocoder()
-
-    init() {
-        if (CLLocationManager.authorizationStatus() != .authorizedWhenInUse) {
-            self.manager.requestWhenInUseAuthorization()
+    
+    init() {}
+    
+    var isAuthorized: Bool {
+        switch (CLLocationManager.authorizationStatus()) {
+        case .authorizedAlways, .authorizedWhenInUse: return true
+        case .denied, .notDetermined, .restricted: return false
         }
     }
-    
+
     func getPlacemarks(location: CLLocation, completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
-        if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
-            self.geocoder.reverseGeocodeLocation(location, completionHandler: completion)
-        }
+        self.geocoder.reverseGeocodeLocation(location, completionHandler: completion)
     }
     
     var location: CLLocation? {
         return self.manager.location
+    }
+    
+    func requestAuthorization() {
+        self.manager.requestWhenInUseAuthorization()
     }
 }
