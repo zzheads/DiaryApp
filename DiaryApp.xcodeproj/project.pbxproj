@@ -39,7 +39,6 @@
 		A6D0DC381E25040D00033B82 /* EntryDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */; };
 		A6D0DC3A1E2504A900033B82 /* EntryDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC391E2504A900033B82 /* EntryDetailsController.swift */; };
 		A6D0DC3C1E2519D300033B82 /* MediaPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */; };
-		A6D0DC401E251A5500033B82 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +79,6 @@
 		A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryDetailsController.xib; sourceTree = "<group>"; };
 		A6D0DC391E2504A900033B82 /* EntryDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailsController.swift; sourceTree = "<group>"; };
 		A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPickerManager.swift; sourceTree = "<group>"; };
-		A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +174,6 @@
 				A68317B81E22673E0097F588 /* EntryCell.swift */,
 				A68317C01E2297A20097F588 /* EntryCell.xib */,
 				A6D0DC371E25040D00033B82 /* EntryDetailsController.xib */,
-				A6D0DC3F1E251A5500033B82 /* PhotoCell.swift */,
 			);
 			name = Design;
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 				A68317CF1E2374450097F588 /* UIImageView+Circle.swift in Sources */,
 				A68317B91E22673E0097F588 /* EntryCell.swift in Sources */,
 				A651F5281E21565C0002FE4A /* QueryType.swift in Sources */,
-				A6D0DC401E251A5500033B82 /* PhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
