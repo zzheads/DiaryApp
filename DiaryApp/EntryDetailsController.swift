@@ -119,7 +119,6 @@ extension EntryDetailsController {
     }
     
     func cancelEntryDetails(sender: UIBarButtonItem) {
-        CoreDataController.sharedInstance.managedObjectContext.undo()
         getBack()
     }
     

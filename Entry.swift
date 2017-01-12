@@ -16,6 +16,18 @@ class Entry: NSManagedObject, EntryType {
     static let entityName = "\(Entry.self)"
     static let emptyTextPlaceholder = "Record your thoughts for today"
     
+    convenience init() {
+        let context = CoreDataController.sharedInstance.managedObjectContext
+        let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context)!
+        self.init(entity: entity, insertInto: context)
+        self.text = ""
+        self.date = Date()
+        self.mood = .Unknown
+        self.photo = nil
+        self.location = nil
+        self.placemark = nil
+    }
+    
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
@@ -45,9 +57,9 @@ class Entry: NSManagedObject, EntryType {
         return request
     }()
     
-    class func entriesWithTitle(title: String) -> NSFetchRequest<NSFetchRequestResult> {
+    class func entriesWithDate(dateString: String) -> NSFetchRequest<NSFetchRequestResult> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: Entry.entityName)
-        let predicate = NSPredicate(format: "title = %@", title)
+        let predicate = NSPredicate(format: "date == %@", dateString)
         request.predicate = predicate
         return request
     }
@@ -68,7 +80,7 @@ extension Entry {
     }
     
     @NSManaged private var photoData: Data?
-    public var photo: UIImage? {
+    public weak var photo: UIImage? {
         get {
             guard
                 let data = self.photoData,
@@ -89,7 +101,7 @@ extension Entry {
     
     @NSManaged private var latitude: Double
     @NSManaged private var longitude: Double
-    public var location: CLLocation? {
+    public weak var location: CLLocation? {
         get {
             if ((!self.longitude.isNaN) && (!self.latitude.isNaN)) {
                 return CLLocation(latitude: self.latitude, longitude: self.longitude)

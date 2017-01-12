@@ -12,37 +12,20 @@ import CoreData
 
 class EntryDataSource: NSObject {
     let tableView: UITableView
+    let dataController = CoreDataController.sharedInstance
 
-    var count: Int
-    var results: [Entry] {
-        // For debug purposes only, same with self.count variable, after debug - remove it and observers
-        willSet {
-            self.count = self.results.count
-        }
-        didSet {
-            if (self.results.count > self.count) {
-                print("DataSource: Added \(self.results.count - self.count) entries...")
-            }
-            if (self.results.count < self.count) {
-                print("DataSource: Removed \(self.count - self.results.count) entries...")
-            }
-            if (self.results.count == self.count) {
-                print("DataSource: Looks like it was update...")
-            }
-        }
-    }
+    var results: [Entry]
     
     init(tableView: UITableView, results: [Entry]) {
         self.tableView = tableView
         self.results = results
-        self.count = 0
         super.init()
         self.tableView.dataSource = self
     }
     
     func objectAt(indexPath: IndexPath) -> Entry {
         return self.results[indexPath.row]
-    }
+    }    
 }
 
 // MARK: - UITableViewDataSource
@@ -66,12 +49,12 @@ extension EntryDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            let updates = [DataProviderUpdate<Entry>.Remove(indexPath)]
+            let updates = [DataProviderUpdate<EntryType>.Remove(indexPath)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .insert:
             let newEntry = Entry(text: "")
-            let updates = [DataProviderUpdate<Entry>.Insert(newEntry)]
+            let updates = [DataProviderUpdate<EntryType>.Insert(newEntry)]
             processUpdates(updates: updates)
             tableView.setEditing(false, animated: true)
         case .none:
@@ -85,7 +68,7 @@ extension EntryDataSource: DataProviderDelegate {
         print("Provider failed with error: \(error)")
     }
     
-    func processUpdates(updates: [DataProviderUpdate<Entry>]) {
+    func processUpdates(updates: [DataProviderUpdate<EntryType>]) {
         var focusIndexPath = IndexPath(row: 0, section: 0)
         
         self.tableView.beginUpdates()
@@ -93,7 +76,7 @@ extension EntryDataSource: DataProviderDelegate {
         for (index, update) in updates.enumerated() {
             switch (update) {
             case .Insert(let entry):
-                self.results.insert(entry, at: index)
+                self.results.insert(entry as! Entry, at: index)
                 let indexPath = IndexPath(row: index, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
                 focusIndexPath = indexPath
@@ -107,6 +90,12 @@ extension EntryDataSource: DataProviderDelegate {
                 self.results[indexPath.row].updateWith(entry: entryWrapper)
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 focusIndexPath = indexPath
+                
+            case .SortByDate:
+                self.results.sort(by: { (leftEntry, rightEntry) -> Bool in
+                    return (leftEntry.date < rightEntry.date)
+                })
+                self.tableView.reloadData()
             }
         }
 
@@ -115,6 +104,7 @@ extension EntryDataSource: DataProviderDelegate {
         if (tableView.cellForRow(at: focusIndexPath) != nil) {
             self.tableView.selectRow(at: focusIndexPath, animated: true, scrollPosition: .middle)
         }
+        self.dataController.saveContext()
         print("Context saved, registered objects: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
     }
 }

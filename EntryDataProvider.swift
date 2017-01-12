@@ -10,20 +10,21 @@ import Foundation
 import CoreData
 
 protocol DataProviderDelegate: class {
-    func processUpdates(updates: [DataProviderUpdate<Entry>])
+    func processUpdates(updates: [DataProviderUpdate<EntryType>])
     func providerFailedWithError(error: Error)
 }
 
 enum DataProviderUpdate<T> {
     case Insert(T)
     case Remove(IndexPath)
-    case Change(EntryWrapper, IndexPath)
+    case Change(T, IndexPath)
+    case SortByDate
 }
 
 class EntryDataProvider {
     let managedObjectContext = CoreDataController.sharedInstance.managedObjectContext
     let coordinator = CoreDataController.sharedInstance.persistentStoreCoordinator
-    var updates = [DataProviderUpdate<Entry>]()
+    var updates = [DataProviderUpdate<EntryType>]()
     
     private weak var delegate: DataProviderDelegate?
     
@@ -33,7 +34,6 @@ class EntryDataProvider {
     
     func perform(request: NSFetchRequest<NSFetchRequestResult>) {
         do {
-            print("Request!")
             let entries = try self.managedObjectContext.fetch(Entry.allEntriesRequest) as! [Entry]
             self.processResult(result: .Success(entries))
         } catch (let error) {

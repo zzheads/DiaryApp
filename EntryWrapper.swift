@@ -68,3 +68,15 @@ class EntryWrapper: EntryType {
         self.placemark = placemark
     }
 }
+
+extension EntryType {
+    func insertInto(arraySortedByDate: [EntryType]) -> Int {
+        for i in 0..<arraySortedByDate.count {
+            let currentEntry = arraySortedByDate[i]
+            if (self.date >= currentEntry.date) {
+                return i
+            }
+        }
+        return arraySortedByDate.count - 1
+    }
+}

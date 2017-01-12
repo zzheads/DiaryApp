@@ -121,15 +121,14 @@ extension ViewController {
     }
     
     func addRecord(sender: UIBarButtonItem) {
-        let emptyEntry = Entry(text: "")
-        let updates = DataProviderUpdate<Entry>.Insert(emptyEntry)
+        let updates = DataProviderUpdate<EntryType>.Insert(Entry())
         self.dataSource.processUpdates(updates: [updates])
     }
 }
 
 extension ViewController: EntryDetailsControllerDelegate {
     func entryDetailsController(didFinishModifyEntry entryWrapper: EntryWrapper, at indexPath: IndexPath) {
-        let update = DataProviderUpdate<Entry>.Change(entryWrapper, indexPath)
+        let update = DataProviderUpdate<EntryType>.Change(entryWrapper, indexPath)
         self.dataSource.processUpdates(updates: [update])
     }
 }

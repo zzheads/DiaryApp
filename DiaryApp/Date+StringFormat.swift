@@ -11,7 +11,7 @@ import Foundation
 extension Date {
     var formattedString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, dd MMMM"        
+        dateFormatter.dateFormat = "EEEE, dd MMMM - yyyy"        
         return "\(dateFormatter.string(from: self))"
     }
 }
