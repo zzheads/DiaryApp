@@ -128,8 +128,8 @@ extension ViewController {
 }
 
 extension ViewController: EntryDetailsControllerDelegate {
-    func entryDetailsController(didFinishModifyEntry entry: Entry, at indexPath: IndexPath) {
-        let update = DataProviderUpdate<Entry>.Change(entry, indexPath)
+    func entryDetailsController(didFinishModifyEntry entryWrapper: EntryWrapper, at indexPath: IndexPath) {
+        let update = DataProviderUpdate<Entry>.Change(entryWrapper, indexPath)
         self.dataSource.processUpdates(updates: [update])
     }
 }

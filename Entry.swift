@@ -12,7 +12,7 @@ import CoreLocation
 import UIKit
 
 @objc(Entry)
-class Entry: NSManagedObject {
+class Entry: NSManagedObject, EntryType {
     static let entityName = "\(Entry.self)"
     static let emptyTextPlaceholder = "Record your thoughts for today"
     
@@ -20,33 +20,18 @@ class Entry: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
-    required convenience init(text: String, date: Date, photo: UIImage?, location: CLLocation?, placemark: String?, mood: Mood) {
+    required convenience init(text: String = "", date: Date = Date(), mood: Mood = .Unknown, photo: UIImage? = nil, location: CLLocation? = nil, placemark: String? = nil) {
         let context = CoreDataController.sharedInstance.managedObjectContext
         let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context)!
         self.init(entity: entity, insertInto: context)
         self.text = text
         self.date = date
+        self.mood = mood
         self.photo = photo
         self.location = location
         self.placemark = placemark
-        self.mood = mood
     }
-    
-    convenience init(text: String, date: Date? = nil, photo: UIImage? = nil, location: CLLocation? = nil, mood: Mood = .Unknown) {
-        let context = CoreDataController.sharedInstance.managedObjectContext
-        let entity = NSEntityDescription.entity(forEntityName: Entry.entityName, in: context)!
-        self.init(entity: entity, insertInto: context)
-        self.text = text
-        if let date = date {
-            self.date = date
-        } else {
-            self.date = Date()
-        }
-        self.photo = photo
-        self.location = location
-        self.mood = mood
-    }
-    
+        
     public func insert() {
         let moc = CoreDataController.sharedInstance.managedObjectContext
         if (moc.registeredObject(for: self.objectID) == nil) {
@@ -123,24 +108,6 @@ extension Entry {
     }
     
     @NSManaged var placemark: String?
-    
-    func setPlacemark(completion: @escaping (String?, Error?) -> Void) {
-        let geocoder = CLGeocoder()
-        guard let location = self.location else {
-            return
-        }
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            guard
-            let placemarks = placemarks,
-            let placemark = placemarks.first
-            else {
-                completion(nil, error)
-                return
-            }
-            self.placemark = placemark.myDescription
-            completion(self.placemark, nil)
-        }
-    }
 }
 
 extension Entry {

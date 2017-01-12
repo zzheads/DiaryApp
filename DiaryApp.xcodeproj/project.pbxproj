@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A643F4091E276130000DF7E8 /* EntryWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A643F4081E276130000DF7E8 /* EntryWrapper.swift */; };
 		A651F4811E1FCE8E0002FE4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651F4801E1FCE8E0002FE4A /* AppDelegate.swift */; };
 		A651F48B1E1FCE8E0002FE4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A651F48A1E1FCE8E0002FE4A /* Assets.xcassets */; };
 		A651F48E1E1FCE8E0002FE4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A651F48C1E1FCE8E0002FE4A /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A643F4081E276130000DF7E8 /* EntryWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryWrapper.swift; sourceTree = "<group>"; };
 		A651F47D1E1FCE8E0002FE4A /* DiaryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiaryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A651F4801E1FCE8E0002FE4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A651F4821E1FCE8E0002FE4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				A651F4DA1E20F31D0002FE4A /* Result.swift */,
 				A68317DF1E239BF10097F588 /* LocationManager.swift */,
 				A6D0DC3B1E2519D300033B82 /* MediaPickerManager.swift */,
+				A643F4081E276130000DF7E8 /* EntryWrapper.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -343,6 +346,7 @@
 				A651F4811E1FCE8E0002FE4A /* AppDelegate.swift in Sources */,
 				A651F4A91E1FD3900002FE4A /* DiaryApp.xcdatamodeld in Sources */,
 				A651F5221E21565C0002FE4A /* Mood.swift in Sources */,
+				A643F4091E276130000DF7E8 /* EntryWrapper.swift in Sources */,
 				A651F5251E21565C0002FE4A /* Entry.swift in Sources */,
 				A6D0DC3A1E2504A900033B82 /* EntryDetailsController.swift in Sources */,
 				A68317D11E2375280097F588 /* Date+StringFormat.swift in Sources */,

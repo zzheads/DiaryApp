@@ -103,8 +103,8 @@ extension EntryDataSource: DataProviderDelegate {
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 focusIndexPath = indexPath
                 
-            case .Change(let entry, let indexPath):
-                self.results[indexPath.row] = entry
+            case .Change(let entryWrapper, let indexPath):
+                self.results[indexPath.row].updateWith(entry: entryWrapper)
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 focusIndexPath = indexPath
             }
@@ -112,7 +112,9 @@ extension EntryDataSource: DataProviderDelegate {
 
         self.tableView.endUpdates()
 
-        self.tableView.selectRow(at: focusIndexPath, animated: true, scrollPosition: .middle)
+        if (tableView.cellForRow(at: focusIndexPath) != nil) {
+            self.tableView.selectRow(at: focusIndexPath, animated: true, scrollPosition: .middle)
+        }
         print("Context saved, registered objects: \(CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count)")
     }
 }

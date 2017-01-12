@@ -17,7 +17,7 @@ protocol DataProviderDelegate: class {
 enum DataProviderUpdate<T> {
     case Insert(T)
     case Remove(IndexPath)
-    case Change(T, IndexPath)
+    case Change(EntryWrapper, IndexPath)
 }
 
 class EntryDataProvider {
