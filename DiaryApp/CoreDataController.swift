@@ -76,4 +76,16 @@ class CoreDataController {
             }
         }
     }
+    
+    func getAllEntries() -> Set<Entry> {
+        return self.managedObjectContext.registeredObjects as! Set<Entry>
+    }
+    
+    func deleteAllEntries() {
+        for entry in getAllEntries() {
+            self.managedObjectContext.delete(entry)
+        }
+        self.saveContext()
+    }
+
 }

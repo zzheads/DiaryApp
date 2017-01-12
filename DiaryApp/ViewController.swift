@@ -64,8 +64,8 @@ class ViewController: UIViewController {
         self.navigationItem.title = "Diary App"
         self.navigationController?.navigationBar.barStyle = .blackOpaque
         self.navigationController?.navigationBar.tintColor = .white
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add record", style: .plain, target: self, action: #selector(self.addRecord(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.sort(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addRecord(sender:)))
         
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
@@ -118,6 +118,11 @@ extension ViewController {
         default:
             break
         }
+    }
+    
+    func sort(sender: UIBarButtonItem) {
+        let updates = DataProviderUpdate<EntryType>.SortByDate
+        self.dataSource.processUpdates(updates: [updates])
     }
     
     func addRecord(sender: UIBarButtonItem) {

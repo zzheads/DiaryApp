@@ -3,22 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "static EntryCell.(instanceFromNib(entry : Entry) -&gt; EntryCell).(closure #1):EntryCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "error.localizedDescription">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EntryDetailsController.saveEntryDetails(sender : UIBarButtonItem) -&gt; ():EntryDetailsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "entry.placemark">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "EntryDetailsController.setupWith(entry : Entry) -&gt; ():EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
@@ -27,15 +11,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EntryDetailsController.(addLocationPressed() -&gt; ()).(closure #1):EntryDetailsController.swift">
+         contextName = "DataProviderTests.testDelete() -&gt; ():DataProviderTests.swift">
          <PersistentStrings>
             <PersistentString
-               value = "placemark.myDescription">
-            </PersistentString>
-            <PersistentString
-               value = "entry.placemark">
+               value = "dataSource.results">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Entry.cell.getter:Entry.swift">
       </ContextState>
       <ContextState
          contextName = "static EntryCell.instanceFromNib(entry : Entry) -&gt; EntryCell:EntryCell.swift">
@@ -49,17 +33,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Entry.cell.getter:Entry.swift">
-      </ContextState>
-      <ContextState
-         contextName = "Location.(init(latitude : Double, longitude : Double) -&gt; Location?).(closure #1):Location.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "error.localizedDescription">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "EntryDataSource.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
@@ -68,13 +41,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Entry.location.getter:Entry.swift">
+         contextName = "Location.(init(latitude : Double, longitude : Double) -&gt; Location?).(closure #1):Location.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.latitude">
-            </PersistentString>
-            <PersistentString
-               value = "self.longitude">
+               value = "error.localizedDescription">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -102,31 +72,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EntryDetailsController.addLocationPressed() -&gt; ():EntryDetailsController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.entry">
-            </PersistentString>
-            <PersistentString
-               value = "manager.location">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Entry.photoWithMood.getter:Entry.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.calculateHeightForCell(cell : EntryCell) -&gt; CGFloat:ViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "EntryDataSource.init(tableView : UITableView, results : [Entry]) -&gt; EntryDataSource:EntryDataSource.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.emptyEntry.date">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "EntryDetailsController.init(entry : Entry) -&gt; EntryDetailsController:EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
@@ -138,10 +83,104 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LocationManager.location.getter:LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.manager">
+            </PersistentString>
+            <PersistentString
+               value = "self.manager.location">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calculateHeightForCell(cell : EntryCell) -&gt; CGFloat:ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EntryDetailsController.saveEntryDetails(sender : UIBarButtonItem) -&gt; ():EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.photo">
+            </PersistentString>
+            <PersistentString
+               value = "entry.placemark">
+            </PersistentString>
+            <PersistentString
+               value = "entry.date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EntryDetailsController.addLocationPressed() -&gt; ():EntryDetailsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.entry">
+            </PersistentString>
+            <PersistentString
+               value = "manager.location">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DiaryAppTests.testDatabaseReadWrite() -&gt; ():DiaryAppTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dataController.managedObjectContext.registeredObjects.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad() -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "objects.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static EntryCell.(instanceFromNib(entry : Entry) -&gt; EntryCell).(closure #1):EntryCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EntryDataSource.processUpdates(updates : [DataProviderUpdate&lt;Entry&gt;]) -&gt; ():EntryDataSource.swift">
          <PersistentStrings>
             <PersistentString
                value = "CoreDataController.sharedInstance.managedObjectContext.registeredObjects.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.results">
+            </PersistentString>
+            <PersistentString
+               value = "entry.date">
+            </PersistentString>
+            <PersistentString
+               value = "entry.placemark">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.entryDetailsController(didFinishModifyEntry : Entry, at : IndexPath) -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "entry.placemark">
+            </PersistentString>
+            <PersistentString
+               value = "entry.date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Entry.photoWithMood.getter:Entry.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EntryDataSource.init(tableView : UITableView, results : [Entry]) -&gt; EntryDataSource:EntryDataSource.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.emptyEntry.date">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -154,13 +193,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LocationManager.location.getter:LocationManager.swift">
+         contextName = "EntryDetailsController.(addLocationPressed() -&gt; ()).(closure #1):EntryDetailsController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.manager">
+               value = "placemark.myDescription">
             </PersistentString>
             <PersistentString
-               value = "self.manager.location">
+               value = "entry.placemark">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Entry.location.getter:Entry.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.latitude">
+            </PersistentString>
+            <PersistentString
+               value = "self.longitude">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
